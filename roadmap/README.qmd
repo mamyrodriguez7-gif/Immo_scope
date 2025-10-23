@@ -69,3 +69,21 @@ Immo_scope/
 ## 🔗 Liens
 - **Repository GitHub**: https://github.com/[TON_COMPTE_GITHUB]/Immo_scope
 - **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
+
+## 🎨 Maquettes des Résultats
+
+### Carte interactive souhaitée
+Une carte de France avec des points colorés selon le prix au m² :
+- 🔴 Zones > 8 000 €/m² (Paris, centres villes)
+- 🟠 Zones 5 000 - 8 000 €/m² (Villes principales)
+- 🟡 Zones 3 000 - 5 000 €/m² (Banlieues)
+- 🟢 Zones < 3 000 €/m² (Zones rurales)
+
+### Dashboard final
+Layout avec 6 composants principaux :
+1. **Carte France** interactive
+2. **Histogramme** distribution des prix
+3. **Courbe** évolution temporelle
+4. **Classement** départements
+5. **Carte de chaleur** densité transactions
+6. **Panneau de filtres** (année, type, surface)
