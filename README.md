@@ -2,11 +2,11 @@
 
 Dashboard interactif pour l'analyse des prix immobiliers en France à partir des données DVF (Demandes de Valeurs Foncières).
 
-## 🎯 Description
+## Description
 **Immo_scope** est un projet de visualisation de données qui permet d'analyser l'évolution des prix immobiliers en France.
 Le projet télécharge, nettoie et visualise automatiquement les données DVF publiques.
 
-## 🏗️ Architecture du Projet
+## Architecture du Projet
 ```
 Immo_scope/
 ├── immo_scope/              # Module Python principal
@@ -23,26 +23,26 @@ Immo_scope/
 └── README.md              # Ce fichier
 ```
 
-## 📊 Fonctionnalités Implémentées
+## Fonctionnalités Implémentées
 
-### ✅ DataLoader
+### DataLoader
 - Téléchargement automatique des données DVF
 - Nettoyage et traitement des données
 - Calcul du prix au m²
 - Filtrage des valeurs aberrantes
 
-### ✅ Visualizer
+### Visualizer
 - Histogramme des prix au m²
 - Classement des départements par prix
 - Relation prix vs surface
 - Top communes par transactions
 
-### 📈 Résultats Actuels
+### Résultats Actuels
 - **100 transactions** analysées
 - **Prix moyen** : 4 617 €/m²
 - **4 visualisations** interactives générées
 
-## 🚀 Installation et Utilisation
+## Installation et Utilisation
 
 ```bash
 # Cloner le repository
@@ -59,21 +59,21 @@ python -c "from immo_scope.data_loader import DataLoader; loader = DataLoader()"
 python -c "from immo_scope.visualizer import PlotVisualizer; visualizer = PlotVisualizer()"
 ```
 
-## 👥 Équipe
+## Équipe
 - **Rodrigue Mamy** (22510795)
 - **Benaissa Hadjer** (22506347)
 - **Léa Benameur** (22514472)
 
-## 📅 Planning
+## Planning
 <img width="2880" height="680" alt="image" src="https://github.com/user-attachments/assets/f0c48dc1-77e1-4074-8b54-09b3c58f339b" />
 
-- **Mi-parcours** : 25 octobre 2025 ✅
+- **Mi-parcours** : 25 octobre 2025 
 - **Finalisation** : 10 décembre 2025
 - **Présentation orale** : 12 décembre 2025
 
-## 🔗 Liens Utiles
+## Liens Utiles
 - [Données DVF](https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncières/)
 - [Documentation Plotly](https://plotly.com/python/)
 
-## 📄 Licence
+## Licence
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
