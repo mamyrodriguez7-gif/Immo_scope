@@ -38,37 +38,11 @@ Immo_scope/
 - **Git/GitHub** pour le versioning
 - **Quarto** pour le rapport final
 
-## 📊 Résultats Préliminaires
-
-### Données analysées
-- **100 transactions immobilières** traitées
-- **Prix moyen**: 4 617 €/m²
-- **Surface moyenne**: 88 m²
-- **Budget moyen**: 273 073 €
-
-### Visualisations créées
-1. **Distribution des prix** au m²
-2. **Classement des départements** par prix
-3. **Relation prix vs surface**
-4. **Top communes** par transactions
-
-## 🔄 Organisation Git
-
-### Branches créées
-- `main` - Version stable
-- `dev` - Développement
-- `feat/data-pipeline` - Traitement des données
-- `feat/visualizations` - Création des graphiques
-
-### Prochaines étapes
-- [ ] Intégration des données historiques
-- [ ] Création de cartes interactives avec Folium
-- [ ] Déploiement du dashboard Quarto
-- [ ] Tests unitaires et CI/CD
 
 ## 🎨 Maquettes des Résultats
 
 ### Carte interactive souhaitée
+![Carte des prix immobiliers en France](sketches/map_sketch.jpg)
 
 Une carte de France avec des points colorés selon le prix au m² :
 - 🔴 Zones > 8 000 €/m² (Paris, centres villes)
@@ -77,8 +51,13 @@ Une carte de France avec des points colorés selon le prix au m² :
 - 🟢 Zones < 3 000 €/m² (Zones rurales)
 
 ### Dashboard final
-
 Layout avec 6 composants principaux :
+1. **Carte France** interactive
+2. **Histogramme** distribution des prix
+3. **Courbe** évolution temporelle
+4. **Classement** départements
+5. **Carte de chaleur** densité transactions
+6. **Panneau de filtres** (année, type, surface)
 1. **Carte France** interactive
 2. **Histogramme** distribution des prix
 3. **Courbe** évolution temporelle
