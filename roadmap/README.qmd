@@ -55,7 +55,7 @@ Immo_scope/
 ## 🔄 Organisation Git
 
 ### Branches créées
-- `main` - Version stable
+- `main` - Branche principale
 - `dev` - Développement
 - `feat/data-pipeline` - Traitement des données
 - `feat/visualizations` - Création des graphiques
@@ -67,7 +67,7 @@ Immo_scope/
 - [ ] Tests unitaires et CI/CD
 
 ## 🔗 Liens
-- **Repository GitHub**: https://github.com/[TON_COMPTE_GITHUB]/Immo_scope
+- **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
 - **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
 
 ## 🎨 Maquettes des Résultats
