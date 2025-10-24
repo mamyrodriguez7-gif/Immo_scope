@@ -65,8 +65,7 @@ python -c "from immo_scope.visualizer import PlotVisualizer; visualizer = PlotVi
 - **Léa Benameur** (22514472)
 
 ## 📅 Planning
-<img width="2880" height="680" alt="image" src="https://github.com/user-attachments/assets/4e86777f-a86a-449b-989c-02c39b7be5ca" />
-
+<img width="2880" height="680" alt="image" src="https://github.com/user-attachments/assets/f0c48dc1-77e1-4074-8b54-09b3c58f339b" />
 
 - **Mi-parcours** : 25 octobre 2025 ✅
 - **Finalisation** : 10 décembre 2025
