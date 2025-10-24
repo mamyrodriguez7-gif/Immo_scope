@@ -38,6 +38,40 @@ Immo_scope/
 - **Git/GitHub** pour le versioning
 - **Quarto** pour le rapport final
 
+<<<<<<< HEAD
+=======
+## 📊 Résultats Préliminaires
+
+### Données analysées
+- **100 transactions immobilières** traitées
+- **Prix moyen**: 4 617 €/m²
+- **Surface moyenne**: 88 m²
+- **Budget moyen**: 273 073 €
+
+### Visualisations créées
+1. **Distribution des prix** au m²
+2. **Classement des départements** par prix
+3. **Relation prix vs surface**
+4. **Top communes** par transactions
+
+## 🔄 Organisation Git
+
+### Branches créées
+- `main` - Branche principale
+- `dev` - Développement
+- `feat/data-pipeline` - Traitement des données
+- `feat/visualizations` - Création des graphiques
+
+### Prochaines étapes
+- [ ] Intégration des données historiques
+- [ ] Création de cartes interactives avec Folium
+- [ ] Déploiement du dashboard Quarto
+- [ ] Tests unitaires et CI/CD
+
+## 🔗 Liens
+- **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
+- **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
+>>>>>>> f0cc2cb6a36741569bf2352652efe27af8418ef7
 
 ## 🎨 Maquettes des Résultats
 
