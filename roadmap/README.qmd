@@ -29,7 +29,7 @@ Immo_scope/
 │   ├── raw/               # Données brutes DVF
 │   └── processed/         # Données nettoyées
 ├── notebooks/             # Exploration des données
-└── roadmap/              # Rapport mi-parcours (ce fichier)
+└── roadmap/              # Rapport mi-parcours
 ```
 
 ### Technologies utilisées
@@ -67,7 +67,7 @@ Immo_scope/
 - [ ] Tests unitaires et CI/CD
 
 ## 🔗 Liens
-- **Repository GitHub**: https://github.com/[TON_COMPTE_GITHUB]/Immo_scope
+- **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
 - **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
 
 ## 🎨 Maquettes des Résultats
