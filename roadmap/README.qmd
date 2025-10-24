@@ -2,7 +2,7 @@
 
 ## 📋 Informations du Groupe
 - **Nom du projet**: Immo_scope
-- **Membres**: 
+- **Membres**:
   - Rodrigue Mamy (22510795)
   - Benaissa Hadjer (22506347)
   - Léa Benameur (22514472)
@@ -29,7 +29,7 @@ Immo_scope/
 │   ├── raw/               # Données brutes DVF
 │   └── processed/         # Données nettoyées
 ├── notebooks/             # Exploration des données
-└── roadmap/              # Rapport mi-parcours
+└── roadmap/              # Rapport mi-parcours (ce fichier)
 ```
 
 ### Technologies utilisées
@@ -66,13 +66,10 @@ Immo_scope/
 - [ ] Déploiement du dashboard Quarto
 - [ ] Tests unitaires et CI/CD
 
-## 🔗 Liens
-- **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
-- **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
-
 ## 🎨 Maquettes des Résultats
 
 ### Carte interactive souhaitée
+
 Une carte de France avec des points colorés selon le prix au m² :
 - 🔴 Zones > 8 000 €/m² (Paris, centres villes)
 - 🟠 Zones 5 000 - 8 000 €/m² (Villes principales)
@@ -80,6 +77,7 @@ Une carte de France avec des points colorés selon le prix au m² :
 - 🟢 Zones < 3 000 €/m² (Zones rurales)
 
 ### Dashboard final
+
 Layout avec 6 composants principaux :
 1. **Carte France** interactive
 2. **Histogramme** distribution des prix
@@ -88,44 +86,6 @@ Layout avec 6 composants principaux :
 5. **Carte de chaleur** densité transactions
 6. **Panneau de filtres** (année, type, surface)
 
-## 📅 Planning Détaillé (Diagramme de Gantt)
-
-### Échéances Clés
-- **25 octobre 2025** ✅ Livraison mi-parcours
-- **10 décembre 2025** Livraison finale
-- **12 décembre 2025** Présentation orale
-
-### Diagramme de Gantt
-```mermaid
-gantt
-    title Diagramme de Gantt - Projet Immo_scope
-    dateFormat  YYYY-MM-DD
-    axisFormat %d/%m
-
-    section Phase 1 - Setup et Exploration
-    Conception architecture      :done, 2025-10-01, 7d
-    Setup GitHub et structure    :done, 2025-10-08, 4d
-    Exploration données DVF      :done, 2025-10-12, 5d
-
-    section Phase 2 - Développement Mi-parcours
-    DataLoader (téléchargement)  :done, 2025-10-15, 5d
-    DataLoader (nettoyage)       :done, 2025-10-18, 4d
-    Visualizer (graphiques)      :done, 2025-10-20, 5d
-    Rapport mi-parcours          :done, 2025-10-23, 3d
-    Livraison mi-parcours        :milestone, 2025-10-25, 0d
-
-    section Phase 3 - Développement Avancé
-    Cartes interactives Folium   :active, 2025-10-26, 10d
-    Données historiques          :2025-11-05, 7d
-    Dashboard Quarto             :2025-11-10, 10d
-
-    section Phase 4 - Finalisation
-    Tests unitaires              :2025-11-20, 7d
-    Optimisation performances    :2025-11-25, 5d
-    Documentation finale         :2025-12-01, 5d
-    Livraison finale             :milestone, 2025-12-10, 0d
-
-    section Phase 5 - Présentation
-    Préparation soutenance       :2025-12-11, 2d
-    Présentation orale           :milestone, 2025-12-12, 0d
-```
+## 🔗 Liens
+- **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
+- **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
