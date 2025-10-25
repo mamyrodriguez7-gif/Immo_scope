@@ -72,7 +72,6 @@ Immo_scope/
 ## Liens
 - **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
 - **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
->>>>>>> f0cc2cb6a36741569bf2352652efe27af8418ef7
 
 ## Maquettes des Résultats
 
