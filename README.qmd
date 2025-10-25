@@ -1,6 +1,6 @@
 # Immo_scope - Rapport de Mi-parcours
 
-## 📋 Informations du Groupe
+## Informations du Groupe
 - **Nom du projet**: Immo_scope
 - **Membres**:
   - Rodrigue Mamy (22510795)
@@ -8,7 +8,7 @@
   - Léa Benameur (22514472)
 - **Date**: 25 octobre 2025
 
-## 🎯 Description du Projet
+## Description du Projet
 **Immo_scope** est un dashboard interactif pour visualiser l'évolution des prix immobiliers en France à partir des données DVF (Demandes de Valeurs Foncières).
 
 ### Objectifs
@@ -17,7 +17,7 @@
 - Comparer les dynamiques urbaines vs rurales
 - Créer des cartes interactives des prix
 
-## 🏗️ Architecture du Projet
+## Architecture du Projet
 
 ### Structure des fichiers
 ```
@@ -40,7 +40,7 @@ Immo_scope/
 
 <<<<<<< HEAD
 =======
-## 📊 Résultats Préliminaires
+## Résultats Préliminaires
 
 ### Données analysées
 - **100 transactions immobilières** traitées
@@ -54,7 +54,7 @@ Immo_scope/
 3. **Relation prix vs surface**
 4. **Top communes** par transactions
 
-## 🔄 Organisation Git
+## Organisation Git
 
 ### Branches créées
 - `main` - Branche principale
@@ -68,12 +68,12 @@ Immo_scope/
 - [ ] Déploiement du dashboard Quarto
 - [ ] Tests unitaires et CI/CD
 
-## 🔗 Liens
+## Liens
 - **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
 - **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
 >>>>>>> f0cc2cb6a36741569bf2352652efe27af8418ef7
 
-## 🎨 Maquettes des Résultats
+## Maquettes des Résultats
 
 ### Carte interactive souhaitée
 ![Carte des prix immobiliers en France](sketches/map_sketch.jpg)
