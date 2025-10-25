@@ -18,9 +18,9 @@ Immo_scope/
 ├── notebooks/              # Exploration et analyse des données
 ├── roadmap/
 │  └── sketches/          # Maquettes des résultats  
+├── requirements.txt        # Dépendances Python
 ├── README.qmd             # Rapport détaillé
-├──requirements.txt        # Dépendances Python
-└── README.md              # Ce fichier
+└── README.md              # Vue d'ensemble + Gantt
 ```
 
 ## Fonctionnalités Implémentées
