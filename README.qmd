@@ -30,6 +30,8 @@ Immo_scope/
 │   └── processed/         # Données nettoyées
 ├── notebooks/             # Exploration des données
 └── roadmap/              # Rapport mi-parcours (ce fichier)
+└── README.qmd            # Rapport mi-parcours
+
 ```
 
 ### Technologies utilisées
