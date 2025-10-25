@@ -17,9 +17,9 @@ Immo_scope/
 │   └── processed/         # Données nettoyées + graphiques HTML
 ├── notebooks/              # Exploration et analyse des données
 ├── roadmap/                # Rapport de mi-parcours
-│   ├── README.qmd         # Rapport détaillé
-│   └── sketches/          # Maquettes des résultats
-├── requirements.txt        # Dépendances Python
+│  └── sketches/          # Maquettes des résultats  
+├── README.qmd             # Rapport détaillé
+├──requirements.txt        # Dépendances Python
 └── README.md              # Ce fichier
 ```
 
