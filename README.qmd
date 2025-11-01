@@ -102,3 +102,68 @@ Layout avec 6 composants principaux :
 ## 🔗 Liens
 - **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
 - **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
+
+## 👥 Répartition des Tâches et Organisation d'Équipe
+
+### 📋 Affectation des Rôles
+**Rodrigue Mamy (22510795)**
+- 🏗️ Architecture globale du projet
+- 🔄 DataLoader (téléchargement et nettoyage des données DVF)
+- 📦 Gestion Git et déploiement GitHub
+- 🐍 Structure des modules Python
+
+**Benaissa Hadjer (22506347)**
+- 📊 Visualizer et génération des graphiques interactifs
+- 📈 Analyses statistiques des données immobilières
+- 📝 Documentation technique et rapports
+- 🎨 Design des visualisations
+
+**Léa Benameur (22514472)**
+- 🔍 Exploration et validation des données DVF
+- 🧪 Tests des fonctionnalités et assurance qualité
+- 📋 Rédaction des cas d'utilisation
+- 🔎 Analyse des besoins utilisateurs
+
+### 🔄 Méthodologie de Travail
+- **Réunions d'équipe** : Coordination hebdomadaire
+- **Revue de code** : Validation croisée des pull requests
+- **Branches feature** : Développement isolé puis intégration
+- **Documentation** : Mise à jour continue des README
+
+## 📊 Analyse des Résultats et Narration
+
+### 🎯 Contexte et Problématique
+Le marché immobilier français présente des disparités importantes entre régions. 
+Notre projet **Immo_scope** vise à rendre ces inégalités visibles et compréhensibles 
+à travers une analyse data-driven des transactions DVF.
+
+### 📈 Insights Découverts
+**1. Disparités Régionales Marquées**
+- Les transactions analysées révèlent un **prix moyen de 4 617 €/m²**
+- Cette moyenne masque d'importantes variations géographiques
+- L'analyse par département permettra d'identifier les zones tendance
+
+**2. Relation Surface-Prix Complexe**
+- Notre analyse prix vs surface montre des corrélations non linéaires
+- Les biens de petite surface présentent souvent un prix au m² plus élevé
+- Les grandes surfaces affichent des dynamiques de marché différentes
+
+**3. Potentiel de Segmentation**
+- La distribution des prix suggère plusieurs segments de marché
+- Chaque segment pourrait justifier des stratégies de visualisation spécifiques
+- L'interactivité permettra aux utilisateurs d'explorer ces segments
+
+### 🗺️ Narration Visuelle Proposée
+Notre dashboard racontera l'histoire suivante :
+
+**"Le paysage immobilier français : entre attractivité et accessibilité"**
+
+1. **Introduction** : Carte globale montrant les disparités
+2. **Exploration** : Zoom par région avec filtres interactifs  
+3. **Analyse** : Graphiques comparatifs urbain vs rural
+4. **Perspective** : Évolution temporelle et tendances
+
+### 🔮 Valeur Ajoutée
+- **Transparence** : Données publiques accessibles à tous
+- **Pédagogie** : Visualisations compréhensibles par des non-experts
+- **Aide à la décision** : Outil d'analyse pour particuliers et professionnels
