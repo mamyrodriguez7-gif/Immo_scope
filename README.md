@@ -16,11 +16,11 @@ Immo_scope/
 │   ├── raw/               # Données brutes DVF
 │   └── processed/         # Données nettoyées + graphiques HTML
 ├── notebooks/              # Exploration et analyse des données
-├── roadmap/                # Rapport de mi-parcours
-│   ├── README.qmd         # Rapport détaillé
-│   └── sketches/          # Maquettes des résultats
+├── roadmap/
+│  └── sketches/          # Maquettes des résultats  
 ├── requirements.txt        # Dépendances Python
-└── README.md              # Ce fichier
+├── README.qmd             # Rapport détaillé
+└── README.md              # Vue d'ensemble + Gantt
 ```
 
 ## Fonctionnalités Implémentées

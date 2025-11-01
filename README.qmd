@@ -29,7 +29,10 @@ Immo_scope/
 │   ├── raw/               # Données brutes DVF
 │   └── processed/         # Données nettoyées
 ├── notebooks/             # Exploration des données
-└── roadmap/              # Rapport mi-parcours (ce fichier)
+└── roadmap/
+    └── sketches/          # Maquettes des résultats
+└── README.qmd            # Rapport mi-parcours
+
 ```
 
 ### Technologies utilisées
@@ -38,8 +41,6 @@ Immo_scope/
 - **Git/GitHub** pour le versioning
 - **Quarto** pour le rapport final
 
-<<<<<<< HEAD
-=======
 ## Résultats Préliminaires
 
 ### Données analysées
@@ -71,7 +72,6 @@ Immo_scope/
 ## Liens
 - **Repository GitHub**: https://github.com/mamyrodriguez7-gif/Immo_scope
 - **Données DVF**: https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/
->>>>>>> f0cc2cb6a36741569bf2352652efe27af8418ef7
 
 ## Maquettes des Résultats
 
@@ -86,12 +86,6 @@ Une carte de France avec des points colorés selon le prix au m² :
 
 ### Dashboard final
 Layout avec 6 composants principaux :
-1. **Carte France** interactive
-2. **Histogramme** distribution des prix
-3. **Courbe** évolution temporelle
-4. **Classement** départements
-5. **Carte de chaleur** densité transactions
-6. **Panneau de filtres** (année, type, surface)
 1. **Carte France** interactive
 2. **Histogramme** distribution des prix
 3. **Courbe** évolution temporelle
