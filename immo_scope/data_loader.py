@@ -1,6 +1,6 @@
 """
 MODULE data_loader.py
-Classe pour télécharger, charger et nettoyer les données DVF
+Classe pour télécharger, charger et nettoyer les données DVF multi-années
 """
 import pandas as pd
 import requests
@@ -22,33 +22,65 @@ class DataLoader:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         ssl._create_default_https_context = ssl._create_unverified_context
     
-    def download_dvf_data(self, year=2024):
-        """Télécharge les données DVF pour une année donnée"""
-        print(f"📥 Téléchargement des données DVF {year}...")
+    def download_dvf_data(self, years=[2024, 2023, 2022, 2021], sample_per_year=20000):
+        """Télécharge les données DVF pour plusieurs années avec échantillonnage"""
+        print(f"📥 Téléchargement des données DVF pour les années {years}...")
+        all_data = []
         
-        # URL des données DVF 2024
-        url = "https://files.data.gouv.fr/geo-dvf/latest/csv/2024/full.csv.gz"
+        for year in years:
+            print(f"\n🔹 Traitement de l'année {year}...")
+            
+            # URL des données DVF pour chaque année
+            url = f"https://files.data.gouv.fr/geo-dvf/latest/csv/{year}/full.csv.gz"
+            
+            try:
+                # Vérifier si le fichier existe déjà
+                file_path = self.raw_dir / f"dvf_{year}.csv.gz"
+                
+                if not file_path.exists():
+                    print(f"  📥 Téléchargement depuis {url}...")
+                    response = requests.get(url, verify=False, timeout=60)
+                    response.raise_for_status()
+                    
+                    with open(file_path, 'wb') as f:
+                        f.write(response.content)
+                    print(f"  ✅ Fichier téléchargé: {file_path}")
+                else:
+                    print(f"  ✅ Fichier déjà existant: {file_path}")
+                
+                # Charger et nettoyer les données de cette année
+                df_year = self.load_and_clean_data(file_path, sample_size=sample_per_year)
+                if df_year is not None and len(df_year) > 0:
+                    df_year['annee'] = year  # Ajouter la colonne année
+                    all_data.append(df_year)
+                    print(f"  ✅ Données {year} nettoyées: {len(df_year)} transactions")
+                else:
+                    print(f"  ⚠️  Aucune donnée valide pour {year}")
+                
+            except Exception as e:
+                print(f"  ❌ Erreur pour l'année {year}: {e}")
+                continue
         
-        try:
-            # Télécharger avec requests
-            response = requests.get(url, verify=False, timeout=30)
-            response.raise_for_status()
+        # Combiner toutes les années
+        if all_data:
+            df_combined = pd.concat(all_data, ignore_index=True)
+            total_transactions = len(df_combined)
+            print(f"\n🎉 DONNÉES COMBINÉES: {total_transactions:,} transactions sur {len(years)} années")
             
-            # Sauvegarder le fichier
-            file_path = self.raw_dir / f"dvf_{year}.csv.gz"
-            with open(file_path, 'wb') as f:
-                f.write(response.content)
+            # Statistiques par année
+            print("📊 Répartition par année:")
+            for year in years:
+                count = len(df_combined[df_combined['annee'] == year])
+                print(f"   • {year}: {count:,} transactions")
             
-            print(f"✅ Données {year} téléchargées: {file_path}")
-            return file_path
-            
-        except Exception as e:
-            print(f"❌ Erreur lors du téléchargement: {e}")
+            return df_combined
+        else:
+            print("❌ Aucune donnée valide téléchargée")
             return None
     
     def load_and_clean_data(self, file_path, sample_size=None):
         """Charge et nettoie les données DVF"""
-        print("🧹 Chargement et nettoyage des données...")
+        print("  🧹 Chargement et nettoyage des données...")
         
         try:
             # Charger les données
@@ -57,37 +89,25 @@ class DataLoader:
             else:
                 df = pd.read_csv(file_path, compression='gzip', low_memory=False)
                 
-            print(f"✅ Données brutes chargées: {len(df)} lignes")
-            
-            # Générer un rapport avant nettoyage
-            rapport_avant = self._generate_quality_report(df, "AVANT nettoyage")
+            print(f"  ✅ Données brutes chargées: {len(df)} lignes")
             
             # Nettoyer les données
             df_clean = self._clean_data(df)
             
-            # Générer un rapport après nettoyage
-            rapport_apres = self._generate_quality_report(df_clean, "APRÈS nettoyage")
-            
-            # Afficher le résumé du nettoyage
-            self._display_cleaning_summary(len(df), len(df_clean), rapport_avant, rapport_apres)
-            
             return df_clean
             
         except Exception as e:
-            print(f"❌ Erreur lors du chargement: {e}")
+            print(f"  ❌ Erreur lors du chargement: {e}")
             return None
     
     def _clean_data(self, df):
         """Nettoie les données DVF de manière complète"""
-        print("🔧 Nettoyage en cours...")
+        print("  🔧 Nettoyage en cours...")
         
         # Copie pour éviter les modifications accidentelles
         df_clean = df.copy()
         
         # === ÉTAPE 1: NETTOYAGE DES COLONNES NUMÉRIQUES ===
-        print("  📊 Conversion des colonnes numériques...")
-        
-        # Colonnes à convertir en numérique
         numeric_columns = {
             'valeur_fonciere': 'Prix de vente',
             'surface_reelle_bati': 'Surface bâtie', 
@@ -100,32 +120,23 @@ class DataLoader:
         for col, desc in numeric_columns.items():
             if col in df_clean.columns:
                 df_clean[col] = pd.to_numeric(df_clean[col], errors='coerce')
-                valeurs_manquantes = df_clean[col].isna().sum()
-                if valeurs_manquantes > 0:
-                    print(f"    ⚠️  {valeurs_manquantes} valeurs manquantes dans {desc}")
         
         # === ÉTAPE 2: FILTRAGE DES DONNÉES ABERRANTES ===
-        print("  🎯 Filtrage des données aberrantes...")
-        
         conditions_filtrage = []
         
         # Filtre sur les prix
         if 'valeur_fonciere' in df_clean.columns:
             conditions_filtrage.append(
                 (df_clean['valeur_fonciere'] > 1000) & 
-                (df_clean['valeur_fonciere'] < 5000000)  # Prix entre 1k€ et 5M€
+                (df_clean['valeur_fonciere'] < 5000000)
             )
-            prix_aberrants = len(df_clean) - (df_clean['valeur_fonciere'] > 1000).sum()
-            print(f"    ✅ Prix filtrés: {prix_aberrants} valeurs aberrantes supprimées")
         
         # Filtre sur les surfaces
         if 'surface_reelle_bati' in df_clean.columns:
             conditions_filtrage.append(
                 (df_clean['surface_reelle_bati'] > 0) &
-                (df_clean['surface_reelle_bati'] < 1000)  # Surface entre 1m² et 1000m²
+                (df_clean['surface_reelle_bati'] < 1000)
             )
-            surface_aberrante = len(df_clean) - (df_clean['surface_reelle_bati'] > 0).sum()
-            print(f"    ✅ Surfaces filtrées: {surface_aberrante} valeurs aberrantes supprimées")
         
         # Appliquer tous les filtres
         if conditions_filtrage:
@@ -134,115 +145,42 @@ class DataLoader:
                 masque_combine &= condition
             
             df_clean = df_clean[masque_combine]
-            print(f"    📉 Données après filtrage: {len(df_clean)} lignes")
         
         # === ÉTAPE 3: CALCUL DES MÉTRIQUES ===
-        print("  📈 Calcul des métriques...")
-        
         # Calcul du prix au m²
         if all(col in df_clean.columns for col in ['valeur_fonciere', 'surface_reelle_bati']):
             df_clean['prix_m2'] = df_clean['valeur_fonciere'] / df_clean['surface_reelle_bati']
-            print("    ✅ Prix au m² calculé")
         
         # Filtrage des prix au m² aberrants
         if 'prix_m2' in df_clean.columns:
             df_clean = df_clean[
                 (df_clean['prix_m2'] > 100) & 
-                (df_clean['prix_m2'] < 20000)  # Prix au m² entre 100€ et 20,000€
+                (df_clean['prix_m2'] < 20000)
             ]
-            print(f"    ✅ Prix au m² filtrés: {len(df_clean)} lignes restantes")
         
         # === ÉTAPE 4: NETTOYAGE DES CHAÎNES DE CARACTÈRES ===
-        print("  🔤 Nettoyage des textes...")
-        
         # Nettoyer les noms de communes
         if 'nom_commune' in df_clean.columns:
             df_clean['nom_commune'] = df_clean['nom_commune'].str.title().str.strip()
-            communes_uniques = df_clean['nom_commune'].nunique()
-            print(f"    ✅ Communes nettoyées: {communes_uniques} communes uniques")
         
         # Nettoyer les types de biens
         if 'type_local' in df_clean.columns:
             df_clean['type_local'] = df_clean['type_local'].str.strip()
-            types_locaux = df_clean['type_local'].value_counts()
-            print(f"    ✅ Types de biens: {len(types_locaux)} catégories")
         
         # === ÉTAPE 5: GESTION DES VALEURS MANQUANTES ===
-        print("  🗑️  Gestion des valeurs manquantes...")
-        
         # Supprimer les lignes avec des valeurs essentielles manquantes
         colonnes_essentielles = ['valeur_fonciere', 'surface_reelle_bati', 'prix_m2']
         colonnes_presentes = [col for col in colonnes_essentielles if col in df_clean.columns]
         
         if colonnes_presentes:
             df_clean = df_clean.dropna(subset=colonnes_presentes)
-            print(f"    ✅ Valeurs manquantes supprimées: {len(df_clean)} lignes restantes")
         
         # Réinitialiser l'index après tous les filtrages
         df_clean = df_clean.reset_index(drop=True)
         
-        print(f"✅ Nettoyage terminé: {len(df_clean)} transactions valides")
+        print(f"  ✅ Nettoyage terminé: {len(df_clean)} transactions valides")
         
         return df_clean
-    
-    def _generate_quality_report(self, df, etape):
-        """Génère un rapport de qualité des données"""
-        rapport = {
-            'etape': etape,
-            'nombre_lignes': len(df),
-            'nombre_colonnes': len(df.columns),
-            'colonnes_disponibles': list(df.columns),
-            'valeurs_manquantes': {},
-            'statistiques_prix': {},
-            'statistiques_surface': {}
-        }
-        
-        # Statistiques sur les valeurs manquantes
-        for col in df.columns:
-            manquants = df[col].isna().sum()
-            if manquants > 0:
-                rapport['valeurs_manquantes'][col] = manquants
-        
-        # Statistiques sur les prix
-        if 'valeur_fonciere' in df.columns:
-            rapport['statistiques_prix'] = {
-                'moyenne': df['valeur_fonciere'].mean(),
-                'mediane': df['valeur_fonciere'].median(),
-                'min': df['valeur_fonciere'].min(),
-                'max': df['valeur_fonciere'].max(),
-                'ecart_type': df['valeur_fonciere'].std()
-            }
-        
-        # Statistiques sur les surfaces
-        if 'surface_reelle_bati' in df.columns:
-            rapport['statistiques_surface'] = {
-                'moyenne': df['surface_reelle_bati'].mean(),
-                'mediane': df['surface_reelle_bati'].median(),
-                'min': df['surface_reelle_bati'].min(),
-                'max': df['surface_reelle_bati'].max()
-            }
-        
-        return rapport
-    
-    def _display_cleaning_summary(self, total_avant, total_apres, rapport_avant, rapport_apres):
-        """Affiche un résumé du processus de nettoyage"""
-        print("\n" + "="*60)
-        print("📊 RÉSUMÉ DU NETTOYAGE DES DONNÉES")
-        print("="*60)
-        
-        pourcentage_garde = (total_apres / total_avant) * 100
-        print(f"📈 Conservation des données: {pourcentage_garde:.1f}%")
-        print(f"   • Avant nettoyage: {total_avant:,} transactions")
-        print(f"   • Après nettoyage: {total_apres:,} transactions")
-        print(f"   • Données supprimées: {total_avant - total_apres:,} transactions")
-        
-        if total_apres > 0:
-            if 'prix_m2' in rapport_apres['colonnes_disponibles']:
-                prix_moyen = self._get_df_from_memory().get('prix_m2_moyen', 0)
-                print(f"💰 Prix au m² moyen: {prix_moyen:.0f} €/m²")
-        
-        print("✅ Nettoyage terminé avec succès!")
-        print("="*60)
     
     def get_data_quality_report(self, df):
         """Génère un rapport de qualité des données pour le dashboard"""
@@ -256,7 +194,8 @@ class DataLoader:
             'data_quality_score': self._calculate_quality_score(df),
             'price_stats': {},
             'surface_stats': {},
-            'geographic_coverage': {}
+            'geographic_coverage': {},
+            'yearly_stats': {}
         }
         
         # Statistiques prix
@@ -283,6 +222,16 @@ class DataLoader:
                 'unique_departments': df['code_departement'].nunique() if 'code_departement' in df.columns else 0
             }
         
+        # Statistiques par année
+        if 'annee' in df.columns:
+            yearly_stats = df.groupby('annee').agg({
+                'prix_m2': ['mean', 'count'],
+                'surface_reelle_bati': 'mean'
+            }).round(0)
+            
+            yearly_stats.columns = ['prix_moyen', 'nb_transactions', 'surface_moyenne']
+            rapport['yearly_stats'] = yearly_stats.to_dict()
+        
         return rapport
     
     def _calculate_quality_score(self, df):
@@ -294,7 +243,7 @@ class DataLoader:
         missing_cells = df.isnull().sum().sum()
         if total_cells > 0:
             missing_percentage = (missing_cells / total_cells) * 100
-            score -= missing_percentage * 0.5  # Pénalité modérée
+            score -= missing_percentage * 0.5
         
         # Vérification de la cohérence des prix
         if 'prix_m2' in df.columns:
@@ -312,30 +261,26 @@ class DataLoader:
         print(f"💾 Données sauvegardées: {file_path}")
         return file_path
 
-    def _get_df_from_memory(self):
-        """Méthode utilitaire pour récupérer les stats des données"""
-        try:
-            df_temp = pd.read_csv(self.processed_dir / "dvf_cleaned.csv")
-            return {
-                'prix_m2_moyen': df_temp['prix_m2'].mean() if 'prix_m2' in df_temp.columns else 0
-            }
-        except:
-            return {}
-
 # Test du DataLoader
 if __name__ == "__main__":
-    print("🧪 Test du DataLoader...")
+    print("🧪 Test du DataLoader multi-années...")
     
     loader = DataLoader()
-    data_path = loader.download_dvf_data(2024)
     
-    if data_path:
-        # Tester avec un échantillon plus grand pour avoir plus de villes
-        df_clean = loader.load_and_clean_data(data_path, sample_size=20000)
-        if df_clean is not None:
-            loader.save_processed_data(df_clean)
-            print(f"🎉 DataLoader testé avec succès! {len(df_clean)} transactions valides")
-            
-            # Afficher le rapport de qualité
-            rapport = loader.get_data_quality_report(df_clean)
-            print(f"📊 Score de qualité: {rapport['data_quality_score']}/100")
+    # Tester avec 2 années d'abord pour être sûr
+    df_clean = loader.download_dvf_data(years=[2024, 2023], sample_per_year=15000)
+    
+    if df_clean is not None:
+        loader.save_processed_data(df_clean)
+        print(f"🎉 DataLoader testé avec succès! {len(df_clean):,} transactions sur {df_clean['annee'].nunique()} années")
+        
+        # Afficher le rapport de qualité
+        rapport = loader.get_data_quality_report(df_clean)
+        print(f"📊 Score de qualité: {rapport['data_quality_score']}/100")
+        
+        # Afficher les statistiques par année (VERSION CORRIGÉE)
+        print("📅 Statistiques par année:")
+        for annee in df_clean['annee'].unique():
+            count = len(df_clean[df_clean['annee'] == annee])
+            prix_moyen = df_clean[df_clean['annee'] == annee]['prix_m2'].mean()
+            print(f"   • {annee}: {count:,} transactions, {prix_moyen:.0f} €/m²")
