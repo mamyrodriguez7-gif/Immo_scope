@@ -24,11 +24,11 @@ class DataLoader:
     
     def download_dvf_data(self, years=[2024, 2023, 2022, 2021], sample_per_year=20000):
         """Télécharge les données DVF pour plusieurs années avec échantillonnage"""
-        print(f"📥 Téléchargement des données DVF pour les années {years}...")
+        print(f"Téléchargement des données DVF pour les années {years}...")
         all_data = []
         
         for year in years:
-            print(f"\n🔹 Traitement de l'année {year}...")
+            print(f"\n Traitement de l'année {year}...")
             
             # URL des données DVF pour chaque année
             url = f"https://files.data.gouv.fr/geo-dvf/latest/csv/{year}/full.csv.gz"
@@ -38,49 +38,49 @@ class DataLoader:
                 file_path = self.raw_dir / f"dvf_{year}.csv.gz"
                 
                 if not file_path.exists():
-                    print(f"  📥 Téléchargement depuis {url}...")
+                    print(f"  Téléchargement depuis {url}...")
                     response = requests.get(url, verify=False, timeout=60)
                     response.raise_for_status()
                     
                     with open(file_path, 'wb') as f:
                         f.write(response.content)
-                    print(f"  ✅ Fichier téléchargé: {file_path}")
+                    print(f"   Fichier téléchargé: {file_path}")
                 else:
-                    print(f"  ✅ Fichier déjà existant: {file_path}")
+                    print(f"   Fichier déjà existant: {file_path}")
                 
                 # Charger et nettoyer les données de cette année
                 df_year = self.load_and_clean_data(file_path, sample_size=sample_per_year)
                 if df_year is not None and len(df_year) > 0:
                     df_year['annee'] = year  # Ajouter la colonne année
                     all_data.append(df_year)
-                    print(f"  ✅ Données {year} nettoyées: {len(df_year)} transactions")
+                    print(f"   Données {year} nettoyées: {len(df_year)} transactions")
                 else:
-                    print(f"  ⚠️  Aucune donnée valide pour {year}")
+                    print(f"    Aucune donnée valide pour {year}")
                 
             except Exception as e:
-                print(f"  ❌ Erreur pour l'année {year}: {e}")
+                print(f"   Erreur pour l'année {year}: {e}")
                 continue
         
         # Combiner toutes les années
         if all_data:
             df_combined = pd.concat(all_data, ignore_index=True)
             total_transactions = len(df_combined)
-            print(f"\n🎉 DONNÉES COMBINÉES: {total_transactions:,} transactions sur {len(years)} années")
+            print(f"\n DONNÉES COMBINÉES: {total_transactions:,} transactions sur {len(years)} années")
             
             # Statistiques par année
-            print("📊 Répartition par année:")
+            print(" Répartition par année:")
             for year in years:
                 count = len(df_combined[df_combined['annee'] == year])
                 print(f"   • {year}: {count:,} transactions")
             
             return df_combined
         else:
-            print("❌ Aucune donnée valide téléchargée")
+            print(" Aucune donnée valide téléchargée")
             return None
     
     def load_and_clean_data(self, file_path, sample_size=None):
         """Charge et nettoie les données DVF"""
-        print("  🧹 Chargement et nettoyage des données...")
+        print("   Chargement et nettoyage des données...")
         
         try:
             # Charger les données
@@ -89,7 +89,7 @@ class DataLoader:
             else:
                 df = pd.read_csv(file_path, compression='gzip', low_memory=False)
                 
-            print(f"  ✅ Données brutes chargées: {len(df)} lignes")
+            print(f"   Données brutes chargées: {len(df)} lignes")
             
             # Nettoyer les données
             df_clean = self._clean_data(df)
@@ -97,12 +97,12 @@ class DataLoader:
             return df_clean
             
         except Exception as e:
-            print(f"  ❌ Erreur lors du chargement: {e}")
+            print(f"   Erreur lors du chargement: {e}")
             return None
     
     def _clean_data(self, df):
         """Nettoie les données DVF de manière complète"""
-        print("  🔧 Nettoyage en cours...")
+        print("   Nettoyage en cours...")
         
         # Copie pour éviter les modifications accidentelles
         df_clean = df.copy()
@@ -178,7 +178,7 @@ class DataLoader:
         # Réinitialiser l'index après tous les filtrages
         df_clean = df_clean.reset_index(drop=True)
         
-        print(f"  ✅ Nettoyage terminé: {len(df_clean)} transactions valides")
+        print(f"   Nettoyage terminé: {len(df_clean)} transactions valides")
         
         return df_clean
     
@@ -258,12 +258,12 @@ class DataLoader:
         """Sauvegarde les données nettoyées"""
         file_path = self.processed_dir / filename
         df.to_csv(file_path, index=False)
-        print(f"💾 Données sauvegardées: {file_path}")
+        print(f" Données sauvegardées: {file_path}")
         return file_path
 
 # Test du DataLoader
 if __name__ == "__main__":
-    print("🧪 Test du DataLoader multi-années...")
+    print(" Test du DataLoader multi-années...")
     
     loader = DataLoader()
     
@@ -272,14 +272,14 @@ if __name__ == "__main__":
     
     if df_clean is not None:
         loader.save_processed_data(df_clean)
-        print(f"🎉 DataLoader testé avec succès! {len(df_clean):,} transactions sur {df_clean['annee'].nunique()} années")
+        print(f" DataLoader testé avec succès! {len(df_clean):,} transactions sur {df_clean['annee'].nunique()} années")
         
         # Afficher le rapport de qualité
         rapport = loader.get_data_quality_report(df_clean)
-        print(f"📊 Score de qualité: {rapport['data_quality_score']}/100")
+        print(f" Score de qualité: {rapport['data_quality_score']}/100")
         
         # Afficher les statistiques par année (VERSION CORRIGÉE)
-        print("📅 Statistiques par année:")
+        print(" Statistiques par année:")
         for annee in df_clean['annee'].unique():
             count = len(df_clean[df_clean['annee'] == annee])
             prix_moyen = df_clean[df_clean['annee'] == annee]['prix_m2'].mean()
