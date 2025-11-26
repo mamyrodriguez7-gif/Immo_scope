@@ -1,0 +1,20 @@
+{
+  "generation_par": "Rodrigue Mamy (22510795)",
+  "date": "2025-11-26T14:47:12.382607",
+  "statistiques": {
+    "transactions": 822,
+    "annees": [
+      2023
+    ],
+    "prix_moyen_m2": 3574,
+    "communes": 689
+  },
+  "fichiers_fournis": [
+    "data/processed/dvf_cleaned.csv - Données principales",
+    "data/reports/report.json - Métriques techniques"
+  ],
+  "prochaines_etapes": {
+    "hadjer": "Développer le dashboard avec Plotly/Folium",
+    "lea": "Tests qualité données et validation"
+  }
+}

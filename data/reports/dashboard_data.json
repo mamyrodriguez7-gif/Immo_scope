@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "generated_by": "Rodrigue Mamy (22510795)",
+    "generation_date": "2025-11-26T15:04:58.843933",
+    "data_source": "DVF 2023"
+  },
+  "metrics": {
+    "total_transactions": 822,
+    "avg_price_m2": 3574,
+    "avg_surface": 81,
+    "avg_budget": 250403,
+    "cities_covered": 689,
+    "departments_covered": 96
+  },
+  "visualization_data": {
+    "price_distribution": {
+      "min": 500,
+      "max": 19545,
+      "mean": 3574,
+      "median": 2692
+    },
+    "property_types": {
+      "Maison": 467,
+      "Appartement": 355
+    },
+    "top_cities": {
+      "Toulouse": 7,
+      "Nîmes": 6,
+      "Limoges": 6,
+      "Nantes": 6,
+      "Montpellier": 5,
+      "Reims": 5,
+      "Bordeaux": 4,
+      "Paris 18E Arrondissement": 4,
+      "Perpignan": 4,
+      "Béziers": 4
+    },
+    "top_departments": {
+      "69": 30,
+      "59": 23,
+      "34": 22,
+      "44": 21,
+      "06": 21
+    }
+  }
+}

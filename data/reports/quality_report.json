@@ -1,0 +1,56 @@
+{
+  "data_quality_metrics": {
+    "completeness_score": 100.0,
+    "total_rows": 822,
+    "total_columns": 9,
+    "missing_values_per_column": {
+      "valeur_fonciere": 0,
+      "surface_reelle_bati": 0,
+      "type_local": 0,
+      "nom_commune": 0,
+      "code_departement": 0,
+      "latitude": 0,
+      "longitude": 0,
+      "prix_m2": 0,
+      "annee": 0
+    }
+  },
+  "validation_checks": {
+    "price_validation": {
+      "min_price_m2": 500,
+      "max_price_m2": 19545,
+      "valid_range": "500 - 20,000 €/m²",
+      "status": " VALIDE"
+    },
+    "surface_validation": {
+      "min_surface": 10,
+      "max_surface": 425,
+      "valid_range": "9 - 500 m²",
+      "status": " VALIDE"
+    }
+  },
+  "columns_analysis": {
+    "available_columns": [
+      "valeur_fonciere",
+      "surface_reelle_bati",
+      "type_local",
+      "nom_commune",
+      "code_departement",
+      "latitude",
+      "longitude",
+      "prix_m2",
+      "annee"
+    ],
+    "data_types": {
+      "valeur_fonciere": "float64",
+      "surface_reelle_bati": "float64",
+      "type_local": "object",
+      "nom_commune": "object",
+      "code_departement": "object",
+      "latitude": "float64",
+      "longitude": "float64",
+      "prix_m2": "float64",
+      "annee": "int64"
+    }
+  }
+}

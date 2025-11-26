@@ -1,19 +1,12 @@
-# Immo_scope - Rapport de Mi-parcours
+# Immo_scope - Analyse du Marché Immobilier Français
 
 ## 📋 Informations du Groupe
-- **Nom du projet**: Immo_scope  
-- **Membres**: [Rodrigue]
-- **Date**: 25 octobre 2025
+- **Nom du projet**: Immo_scope
+- **Membres**:
+  - Rodrigue Mamy (22510795)
+  - Benaissa Hadjer (22506347)
+  - Léa Benameur (22514472)
+- **Date**: Décembre 2024
 
 ## 🎯 Description du Projet
-**Immo_scope** est un dashboard interactif pour visualiser l'évolution des prix immobiliers en France à partir des données DVF (Demandes de Valeurs Foncières).
-
-### Objectifs
-- Visualiser les prix au m² par département
-- Analyser l'évolution temporelle des prix
-- Comparer les dynamiques urbaines vs rurales
-- Créer des cartes interactives des prix
-
-## 🏗️ Architecture du Projet
-
-### Structure des fichiers
+**Immo_scope** est une application interactive...
