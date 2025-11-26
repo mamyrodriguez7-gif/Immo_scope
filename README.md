@@ -1,48 +1,68 @@
 # Immo_scope 📊🏠
 
-Dashboard interactif pour l'analyse des prix immobiliers en France à partir des données DVF (Demandes de Valeurs Foncières).
+**Dashboard interactif pour l'analyse des prix immobiliers en France**  
+*Données DVF (Demandes de Valeurs Foncières) - Analyse 2023*
 
-## Description
-**Immo_scope** est un projet de visualisation de données qui permet d'analyser l'évolution des prix immobiliers en France.
-Le projet télécharge, nettoie et visualise automatiquement les données DVF publiques.
+## 🎯 Description
 
-## Architecture du Projet
-```
+Immo_scope est un projet de data science qui transforme les données DVF publiques en insights visuels. Notre pipeline automatique télécharge, nettoie, analyse et visualise le marché immobilier français.
+
+## 🚀 Statut du Projet
+
+**✅ PHASE DONNÉES TERMINÉE** - *Prêt pour le développement du dashboard*
+
+### 📊 Résultats Actuels
+- **822 transactions** DVF 2023 analysées
+- **Prix moyen** : 3,574 €/m²
+- **689 communes** françaises couvertes
+- **467 Maisons** + **355 Appartements**
+- **Qualité données** : 100%
+
+## 🏗️ Architecture du Projet
+
 Immo_scope/
-├── immo_scope/              # Module Python principal
-│   ├── data_loader.py      # Téléchargement et nettoyage des données DVF
-│   └── visualizer.py       # Création des visualisations interactives
-├── data/                   # Gestion des données
-│   ├── raw/               # Données brutes DVF
-│   └── processed/         # Données nettoyées + graphiques HTML
-├── notebooks/              # Exploration et analyse des données
-├── roadmap/
-│  └── sketches/          # Maquettes des résultats  
-├── requirements.txt        # Dépendances Python
-├── README.qmd             # Rapport détaillé
-└── README.md              # Vue d'ensemble + Gantt
-```
+├── immo_scope/ # 📦 Modules Python
+│ ├── advanced_data_loader.py # 🔄 DataLoader avancé DVF
+│ └── visualizer.py # 🎨 Visualisations (en développement)
+├── scripts/ # 🛠️ Scripts d'analyse
+│ ├── check_results.py # ✅ Vérification données
+│ ├── generate_final_reports.py # 📊 Génération rapports
+│ ├── verify_installation.py # 🔍 Test installation
+│ └── ...
+├── data/ # 🗃️ Données
+│ ├── processed/
+│ │ └── dvf_cleaned.csv # 📈 Données principales
+│ └── reports/ # 📋 Rapports automatiques
+│ ├── dashboard_data.json # 🎨 Données visualisations
+│ ├── quality_report.json # 🔍 Métriques qualité
+│ └── team_report.json # 👥 Rapport équipe
+├── notebooks/ # 🔬 Exploration données
+├── roadmap/ # 📝 Documentation
+│ └── README.qmd # 📋 Rapport mi-parcours
+└── requirements.txt # 📦 Dépendances
 
-## Fonctionnalités Implémentées
 
-### DataLoader
-- Téléchargement automatique des données DVF
-- Nettoyage et traitement des données
-- Calcul du prix au m²
-- Filtrage des valeurs aberrantes
+## ⚡ Fonctionnalités Implémentées
 
-### Visualizer
-- Histogramme des prix au m²
-- Classement des départements par prix
-- Relation prix vs surface
-- Top communes par transactions
+### 🔄 DataLoader Avancé (Rodrigue - ✅ Terminé)
+- Téléchargement automatique DVF 2023
+- Nettoyage intelligent des données
+- Calcul automatique prix au m²
+- Validation qualité complète
+- Génération rapports JSON
 
-### Résultats Actuels
-- **100 transactions** analysées
-- **Prix moyen** : 4 617 €/m²
-- **4 visualisations** interactives générées
+### 📊 Données Livrées
+- `dvf_cleaned.csv` - 822 transactions nettoyées
+- `dashboard_data.json` - Données structurées pour visualisations
+- `quality_report.json` - Métriques qualité complètes
 
-## Installation et Utilisation
+### 🎨 Visualisations (Hadjer - 🚧 En cours)
+*À développer avec les données préparées*
+
+### 🔍 Tests Qualité (Léa - 🔜 Prochain)
+*Validation et assurance qualité*
+
+## 🛠️ Installation et Utilisation
 
 ```bash
 # Cloner le repository
@@ -52,28 +72,70 @@ cd Immo_scope
 # Installer les dépendances
 pip install -r requirements.txt
 
-# Tester le DataLoader
-python -c "from immo_scope.data_loader import DataLoader; loader = DataLoader()"
+# Vérifier l'installation
+python scripts/verify_installation.py
 
-# Générer les visualisations
-python -c "from immo_scope.visualizer import PlotVisualizer; visualizer = PlotVisualizer()"
-```
+# Analyser les données
+python scripts/check_results.py
 
-## Équipe
-- **Rodrigue Mamy** (22510795)
-- **Benaissa Hadjer** (22506347)
-- **Léa Benameur** (22514472)
+# Générer les rapports
+python scripts/generate_final_reports.py
 
-## Planning
-<img width="2880" height="680" alt="image" src="https://github.com/user-attachments/assets/f0c48dc1-77e1-4074-8b54-09b3c58f339b" />
+👥 Équipe & Rôles
+Rodrigue Mamy (22510795) - ✅ Data Engineering
+Architecture projet & DataLoader
 
-- **Mi-parcours** : 25 octobre 2025 
-- **Finalisation** : 10 décembre 2025
-- **Présentation orale** : 12 décembre 2025
+Traitement données DVF 2023
 
-## Liens Utiles
-- [Données DVF](https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncières/)
-- [Documentation Plotly](https://plotly.com/python/)
+Automatisation rapports
 
-## Licence
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+Benaissa Hadjer (22506347) - 🚧 Visualisation
+Dashboard interactif Plotly/Folium
+
+Graphiques et analyses visuelles
+
+Design interface
+
+Léa Benameur (22514472) - 🔜 Qualité & Tests
+Validation données DVF
+
+Tests unitaires et qualité
+
+Documentation utilisateur
+
+📅 Planning - Mi-parcours ✅
+🎯 Prochaines étapes :
+
+Dashboard interactif (Hadjer)
+
+Tests qualité (Léa)
+
+Intégration finale (Équipe)
+
+📈 Résultats & Insights
+🏠 Répartition des biens
+57% Maisons (467 transactions)
+
+43% Appartements (355 transactions)
+
+💰 Analyse des prix
+Prix moyen : 3,574 €/m²
+
+Surface moyenne : 81 m²
+
+Budget moyen : 289,000 €
+
+🗺️ Couverture géographique
+689 communes françaises
+
+Données nationales représentatives
+
+🔗 Liens Utiles
+📂 Repository GitHub : github.com/mamyrodriguez7-gif/Immo_scope
+
+📊 Données DVF : data.gouv.fr
+
+📋 Documentation : roadmap/README.qmd
+
+📄 Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
