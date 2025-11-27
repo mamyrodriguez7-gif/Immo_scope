@@ -128,7 +128,7 @@ python scripts/generate_final_reports.py
 - ** Repository GitHub** : [github.com/mamyrodriguez7-gif/Immo_scope](https://github.com/mamyrodriguez7-gif/Immo_scope)
 - ** Données DVF** : [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncières/)
 - ** Documentation** : `roadmap/README.qmd`
-- taux de chômage : https://www.insee.fr/fr/statistiques/2012804?utm_source=chatgpt.com
+- taux de chômage : https://www.insee.fr/fr/statistiques/2012804?
 - infos sur ménages : https://www.insee.fr/fr/outil-interactif/5367857/territoires/20_DEM/24_CFM
 
 
