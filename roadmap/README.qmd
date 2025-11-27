@@ -1,0 +1,278 @@
+markdown
+# Immo_scope - Rapport Technique Mi-parcours
+
+## 📋 Informations Administratives
+- **Projet** : Immo_scope - Analyse du marché immobilier français
+- **Cours** : HAX712X - Software development for data science
+- **Période** : 2024-2025
+- **Équipe** : 
+  - Rodrigue Mamy (22510795) - Data Engineering
+  - Benaissa Hadjer (22506347) - Data Visualization  
+  - Léa Benameur (22514472) - Quality Assurance
+- **Date** : 25 octobre 2024
+
+## 🎯 Contexte et Objectifs Pédagogiques
+
+### Problématique Métier
+Analyser les disparités géographiques du marché immobilier français à travers les données DVF (Demandes de Valeurs Foncières) pour fournir des insights accessibles au grand public.
+
+### Objectifs Techniques
+- **Data Engineering** : Pipeline ETL robuste pour données DVF
+- **Software Architecture** : Structure modulaire et maintenable
+- **Data Visualization** : Dashboard interactif et pédagogique
+- **Quality Assurance** : Validation et tests automatisés
+- **Collaboration** : Méthodologie Git et revue de code
+
+## 🏗️ Architecture Technique Détaillée
+
+### Stack Technologique
+```python
+# Core Data Processing
+Python 3.12 + pandas → Traitement données
+AdvancedDataLoader → Pipeline ETL personnalisé
+requests → Téléchargement API DVF
+
+# Data Validation & Quality
+pandas profiling → Analyse qualité
+custom validators → Règles métier
+JSON schemas → Contrats données
+
+# Visualization (en cours)
+Plotly → Graphiques interactifs
+Folium → Cartes géographiques
+Quarto → Rapports dynamiques
+
+# DevOps & Collaboration
+Git + GitHub → Versioning
+modular architecture → Maintenance
+automated reports → Documentation
+Workflow de Données
+text
+API DVF (data.gouv.fr)
+        ↓
+[Téléchargement automatique]
+        ↓
+[Nettoyage & Validation]
+        ↓
+[Enrichissement métier]
+        ↓
+[Stockage format standard]
+        ↓
+[Génération rapports JSON]
+        ↓
+[Visualisation Dashboard]
+📊 Résultats Phase 1 - Data Engineering (Rodrigue)
+Métriques de Qualité Données
+Métrique	Valeur	Seuil	Statut
+Complétude	100%	>95%	✅
+Prix m² valides	100%	100%	✅
+Géolocalisation	100%	100%	✅
+Volume transactions	822	>500	✅
+Couverture géographique	689 communes	>200	✅
+Performance DataLoader
+python
+# Métriques techniques
+Temps_processing: "~90 secondes"
+Mémoire_utilisée: "< 500MB"  
+Robustesse: "Gestion erreurs HTTP + timeout"
+Reproductibilité: "Seed aléatoire + logs"
+Structure des Données Produites
+json
+{
+  "datasets": {
+    "dvf_cleaned.csv": {
+      "description": "Données principales nettoyées",
+      "size": "822 transactions",
+      "columns": [
+        "valeur_fonciere", "surface_reelle_bati", "type_local",
+        "nom_commune", "code_departement", "latitude", 
+        "longitude", "prix_m2", "annee"
+      ]
+    }
+  },
+  "reports": {
+    "dashboard_data.json": "Données structurées visualisations",
+    "quality_report.json": "Métriques qualité techniques",
+    "team_report.json": "Suivi projet équipe"
+  }
+}
+🔧 Implémentation Technique - DataLoader
+Classe AdvancedDataLoader
+python
+class AdvancedDataLoader:
+    """Pipeline complet traitement données DVF"""
+    
+    def __init__(self):
+        self.base_url = "https://files.data.gouv.fr/geo-dvf/latest/csv"
+        self.validation_rules = {
+            'prix_m2': (500, 20000),
+            'surface': (9, 500),
+            'geography': {
+                'lat': (41.5, 51.5),
+                'lon': (-2.0, 8.0)
+            }
+        }
+    
+    def download_dvf_data(self, years, sample_size):
+        """Téléchargement avec gestion d'erreurs"""
+    
+    def _clean_and_validate(self, df):
+        """Nettoyage avec règles métier"""
+    
+    def _generate_quality_report(self, df):
+        """Rapport qualité automatique"""
+Règles de Validation Implémentées
+Valeurs aberrantes : Filtrage prix m² hors [500€, 20000€]
+
+Géolocalisation : Coordonnées dans France métropolitaine
+
+Types de biens : Uniquement Maison/Appartement
+
+Surface réaliste : Entre 9m² et 500m²
+
+Consistance temporelle : Données 2023 uniquement
+
+👥 Organisation et Méthodologie
+Workflow de Développement
+text
+Feature Branch → Development → Code Review → Merge → Integration
+    ↓              ↓              ↓           ↓        ↓
+[GitHub]       [Tests locaux] [Validation] [QA]    [Automation]
+Répartition des Rôles Techniques
+Rodrigue Mamy - Data Engineering ✅
+python
+# Responsabilités
+- Conception architecture données (✅)
+- Implémentation DataLoader avancé (✅)
+- Pipeline ETL complet (✅)
+- Automatisation rapports (✅)
+- Optimisation performance (✅)
+
+# Livrables
+- advanced_data_loader.py
+- scripts/ de vérification
+- data/reports/ automatiques
+Benaissa Hadjer - Data Visualization 🚧
+python
+# Responsabilités  
+- Dashboard interactif Plotly (🚧)
+- Cartes géographiques Folium (🔜)
+- Design système visualisation (🔜)
+- Interface utilisateur (🔜)
+
+# Données d'entrée
+- dashboard_data.json (✅ prêt)
+- Structure API définie
+Léa Benameur - Quality Assurance 🔜
+python
+# Responsabilités
+- Tests validation données (🔜)
+- Métriques qualité (🔜)
+- Documentation utilisateur (🔜)
+- Cas de test (🔜)
+
+# Outils disponibles
+- quality_report.json (✅ prêt)
+- Scripts vérification (✅ prêts)
+📅 Planning Technique Détaillé
+Rétroplanning Réalisé (Phase 1)
+Planning Futur (Phases 2-3)
+🔍 Analyse des Résultats Techniques
+Insights Données DVF 2023
+python
+# Distribution géographique
+communes_couvertes = 689
+departements = df['code_departement'].nunique()
+couverture_nationale = "France métropolitaine"
+
+# Analyse typologique
+maisons = 467 (56.8%)
+appartements = 355 (43.2%)
+ratio_maison_appartement = 1.32
+
+# Métriques prix
+prix_moyen_m2 = 3,574 €
+surface_moyenne = 81 m²
+budget_moyen = 289,000 €
+Performance du Pipeline
+Temps d'exécution : Optimisé pour < 2 minutes
+
+Usage mémoire : Contrôlé avec échantillonnage
+
+Robustesse : Gestion complète des erreurs réseau
+
+Reproductibilité : Seed aléatoire + logs détaillés
+
+🚀 Prochaines Étapes Techniques
+Phase 2 - Data Visualization (Hadjer)
+Dashboard Interactif
+
+Architecture composants Plotly
+
+Système de filtres dynamiques
+
+Responsive design mobile/desktop
+
+Visualisations Avancées
+
+Cartes de chaleur géographiques
+
+Analyses temporelles prix
+
+Comparaisons régionales
+
+Phase 3 - Quality Assurance (Léa)
+Tests Automatisés
+
+Unit tests DataLoader
+
+Integration tests pipeline
+
+Validation données
+
+Documentation
+
+Guide utilisateur final
+
+Documentation technique
+
+Procédures déploiement
+
+Livrables Finaux Attendus
+✅ Application web interactive (Dashboard)
+
+✅ Rapport Quarto professionnel
+
+✅ Documentation technique complète
+
+✅ Code source maintenable
+
+✅ Présentation orale (15min + questions)
+
+📎 Annexes Techniques
+Structure du Projet
+text
+Immo_scope/
+├── immo_scope/              # Modules Python
+│   ├── advanced_data_loader.py  # DataLoader principal
+│   └── visualizer.py        # Visualisations (en dev)
+├── scripts/                 # Scripts utilitaires
+│   ├── check_results.py     # Vérification données
+│   ├── generate_final_reports.py # Génération rapports
+│   └── verify_installation.py # Test installation
+├── data/                    # Gestion données
+│   ├── processed/           # Données nettoyées
+│   └── reports/             # Rapports automatiques
+├── notebooks/               # Exploration données
+└── roadmap/                 # Documentation
+    └── README.qmd           # Ce fichier
+Métriques de Suivi Qualité
+Couverture code : Objectif > 80%
+
+Qualité données : Objectif > 95%
+
+Performance : Temps traitement < 3min
+
+Maintenabilité : Documentation complète
+
+*Document technique maintenu par l'équipe Immo_scope*
