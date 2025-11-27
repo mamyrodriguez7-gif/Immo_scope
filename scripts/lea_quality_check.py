@@ -31,7 +31,7 @@ print(f"• Colonnes: {quality_data['data_quality_metrics']['total_columns']}")
 print("\n VALIDATIONS :")
 validations = quality_data['validation_checks']
 for test_name, test_data in validations.items():
-    status = "PASS" if "VALID" in test_data.get('status', '') else "⚠️ CHECK"
+    status = "PASS" if "VALID" in test_data.get('status', '') else " CHECK"
     print(f"• {test_name}: {status}")
 
 print("\n STATISTIQUES RAPIDES :")
