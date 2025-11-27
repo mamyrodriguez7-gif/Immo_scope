@@ -95,7 +95,7 @@ class Visualizer:
             y=stats.index,
             orientation='h',
             labels={'x': 'Nombre de transactions', 'y': 'Commune'},
-            title=f"🏆 Top {top_n} communes par transactions",
+            title=f" Top {top_n} communes par transactions",
             color=stats.values,
             color_continuous_scale="Viridis",
             text=stats.values
