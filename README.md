@@ -1,6 +1,6 @@
 # Immo_scope 📊🏠
 
-**Dashboard interactif pour l'analyse des prix immobiliers en France**  
+**Dashboard interactif pour l'analyse des prix immobiliers en France**
 *Données DVF (Demandes de Valeurs Foncières) - Analyse 2023*
 
 ## 🎯 Description
@@ -20,27 +20,28 @@ Immo_scope est un projet de data science qui transforme les données DVF publiqu
 
 ## 🏗️ Architecture du Projet
 
+```
 Immo_scope/
-├── immo_scope/ # 📦 Modules Python
-│ ├── advanced_data_loader.py # 🔄 DataLoader avancé DVF
-│ └── visualizer.py # 🎨 Visualisations (en développement)
-├── scripts/ # 🛠️ Scripts d'analyse
-│ ├── check_results.py # ✅ Vérification données
-│ ├── generate_final_reports.py # 📊 Génération rapports
-│ ├── verify_installation.py # 🔍 Test installation
-│ └── ...
-├── data/ # 🗃️ Données
-│ ├── processed/
-│ │ └── dvf_cleaned.csv # 📈 Données principales
-│ └── reports/ # 📋 Rapports automatiques
-│ ├── dashboard_data.json # 🎨 Données visualisations
-│ ├── quality_report.json # 🔍 Métriques qualité
-│ └── team_report.json # 👥 Rapport équipe
-├── notebooks/ # 🔬 Exploration données
-├── roadmap/ # 📝 Documentation
-│ └── README.qmd # 📋 Rapport mi-parcours
-└── requirements.txt # 📦 Dépendances
-
+├── immo_scope/                 # 📦 Modules Python
+│   ├── advanced_data_loader.py # 🔄 DataLoader avancé DVF
+│   └── visualizer.py          # 🎨 Visualisations (en développement)
+├── scripts/                    # 🛠️ Scripts d'analyse
+│   ├── check_results.py       # ✅ Vérification données
+│   ├── generate_final_reports.py # 📊 Génération rapports
+│   ├── verify_installation.py # 🔍 Test installation
+│   └── ...
+├── data/                       # 🗃️ Données
+│   ├── processed/
+│   │   └── dvf_cleaned.csv    # 📈 Données principales
+│   └── reports/               # 📋 Rapports automatiques
+│       ├── dashboard_data.json # 🎨 Données visualisations
+│       ├── quality_report.json # 🔍 Métriques qualité
+│       └── team_report.json   # 👥 Rapport équipe
+├── notebooks/                  # 🔬 Exploration données
+├── roadmap/                   # 📝 Documentation
+│   └── README.qmd            # 📋 Rapport mi-parcours
+└── requirements.txt           # 📦 Dépendances
+```
 
 ## ⚡ Fonctionnalités Implémentées
 
@@ -55,6 +56,7 @@ Immo_scope/
 - `dvf_cleaned.csv` - 822 transactions nettoyées
 - `dashboard_data.json` - Données structurées pour visualisations
 - `quality_report.json` - Métriques qualité complètes
+- `team_report.json` - Rapport d'équipe
 
 ### 🎨 Visualisations (Hadjer - 🚧 En cours)
 *À développer avec les données préparées*
@@ -80,62 +82,57 @@ python scripts/check_results.py
 
 # Générer les rapports
 python scripts/generate_final_reports.py
+```
 
-👥 Équipe & Rôles
-Rodrigue Mamy (22510795) - ✅ Data Engineering
-Architecture projet & DataLoader
+## 👥 Équipe & Rôles
 
-Traitement données DVF 2023
+### **Rodrigue Mamy** (22510795) - ✅ **Data Engineering**
+- Architecture projet & DataLoader
+- Traitement données DVF 2023
+- Automatisation rapports
 
-Automatisation rapports
+### **Benaissa Hadjer** (22506347) - 🚧 **Visualisation**
+- Dashboard interactif Plotly/Folium
+- Graphiques et analyses visuelles
+- Design interface
 
-Benaissa Hadjer (22506347) - 🚧 Visualisation
-Dashboard interactif Plotly/Folium
+### **Léa Benameur** (22514472) - 🔜 **Qualité & Tests**
+- Validation données DVF
+- Tests unitaires et qualité
+- Documentation utilisateur
 
-Graphiques et analyses visuelles
+## 📅 Planning - Mi-parcours ✅
 
-Design interface
+**🎯 Prochaines étapes :**
+- Dashboard interactif (Hadjer)
+- Tests qualité (Léa)
+- Intégration finale (Équipe)
 
-Léa Benameur (22514472) - 🔜 Qualité & Tests
-Validation données DVF
+## 📈 Résultats & Insights
 
-Tests unitaires et qualité
+### 🏠 Répartition des biens
+- **57% Maisons** (467 transactions)
+- **43% Appartements** (355 transactions)
 
-Documentation utilisateur
+### 💰 Analyse des prix
+- **Prix moyen** : 3,574 €/m²
+- **Surface moyenne** : 81 m²
+- **Budget moyen** : 289,000 €
 
-📅 Planning - Mi-parcours ✅
-🎯 Prochaines étapes :
+### 🗺️ Couverture géographique
+- **689 communes** françaises
+- Données nationales représentatives
 
-Dashboard interactif (Hadjer)
+## 🔗 Liens Utiles
 
-Tests qualité (Léa)
+- **📂 Repository GitHub** : [github.com/mamyrodriguez7-gif/Immo_scope](https://github.com/mamyrodriguez7-gif/Immo_scope)
+- **📊 Données DVF** : [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncières/)
+- **📋 Documentation** : `roadmap/README.qmd`
 
-Intégration finale (Équipe)
+## 📄 Licence
 
-📈 Résultats & Insights
-🏠 Répartition des biens
-57% Maisons (467 transactions)
+Ce projet est sous licence **MIT**. Voir le fichier `LICENSE` pour plus de détails.
 
-43% Appartements (355 transactions)
+---
 
-💰 Analyse des prix
-Prix moyen : 3,574 €/m²
-
-Surface moyenne : 81 m²
-
-Budget moyen : 289,000 €
-
-🗺️ Couverture géographique
-689 communes françaises
-
-Données nationales représentatives
-
-🔗 Liens Utiles
-📂 Repository GitHub : github.com/mamyrodriguez7-gif/Immo_scope
-
-📊 Données DVF : data.gouv.fr
-
-📋 Documentation : roadmap/README.qmd
-
-📄 Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+*Dernière mise à jour : Novembre 2024 - Phase données terminée ✅*
