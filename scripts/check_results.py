@@ -5,12 +5,12 @@ Created on Wed Nov 26 14:39:00 2025
 @author: mamyr
 """
 
-# 📁 Fichier : check_results.py
+# Fichier : check_results.py
 import pandas as pd
 import json
 from pathlib import Path
 
-print("🔍 RODRIGUE - ANALYSE DES RÉSULTATS")
+print("ANALYSE DES RÉSULTATS")
 print("=" * 50)
 
 # 1. Vérifier les données principales
