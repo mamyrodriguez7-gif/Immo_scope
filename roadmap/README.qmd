@@ -1,7 +1,7 @@
-markdown
+
 # Immo_scope - Rapport Technique Mi-parcours
 
-## 📋 Informations Administratives
+##  Informations Administratives
 - **Projet** : Immo_scope - Analyse du marché immobilier français
 - **Cours** : HAX712X - Software development for data science
 - **Période** : 2024-2025
@@ -11,7 +11,7 @@ markdown
   - Léa Benameur (22514472) - Quality Assurance
 - **Date** : 25 octobre 2024
 
-## 🎯 Contexte et Objectifs Pédagogiques
+##  Contexte et Objectifs Pédagogiques
 
 ### Problématique Métier
 Analyser les disparités géographiques du marché immobilier français à travers les données DVF (Demandes de Valeurs Foncières) pour fournir des insights accessibles au grand public.
@@ -23,7 +23,7 @@ Analyser les disparités géographiques du marché immobilier français à trave
 - **Quality Assurance** : Validation et tests automatisés
 - **Collaboration** : Méthodologie Git et revue de code
 
-## 🏗️ Architecture Technique Détaillée
+##  Architecture Technique Détaillée
 
 ### Stack Technologique
 ```python
@@ -61,14 +61,14 @@ API DVF (data.gouv.fr)
 [Génération rapports JSON]
         ↓
 [Visualisation Dashboard]
-📊 Résultats Phase 1 - Data Engineering (Rodrigue)
+ Résultats Phase 1 - Data Engineering (Rodrigue)
 Métriques de Qualité Données
 Métrique	Valeur	Seuil	Statut
-Complétude	100%	>95%	✅
-Prix m² valides	100%	100%	✅
-Géolocalisation	100%	100%	✅
-Volume transactions	822	>500	✅
-Couverture géographique	689 communes	>200	✅
+Complétude	100%	>95%	
+Prix m² valides	100%	100%	
+Géolocalisation	100%	100%	
+Volume transactions	822	>500	
+Couverture géographique	689 communes	>200	
 Performance DataLoader
 python
 # Métriques techniques
@@ -132,51 +132,70 @@ Surface réaliste : Entre 9m² et 500m²
 
 Consistance temporelle : Données 2023 uniquement
 
-👥 Organisation et Méthodologie
+ Organisation et Méthodologie
 Workflow de Développement
 text
 Feature Branch → Development → Code Review → Merge → Integration
     ↓              ↓              ↓           ↓        ↓
 [GitHub]       [Tests locaux] [Validation] [QA]    [Automation]
 Répartition des Rôles Techniques
-Rodrigue Mamy - Data Engineering ✅
+Rodrigue Mamy - Data Engineering 
 python
 # Responsabilités
-- Conception architecture données (✅)
-- Implémentation DataLoader avancé (✅)
-- Pipeline ETL complet (✅)
-- Automatisation rapports (✅)
-- Optimisation performance (✅)
+- Conception architecture données 
+- Implémentation DataLoader avancé 
+- Pipeline ETL complet 
+- Automatisation rapports 
+- Optimisation performance 
 
 # Livrables
 - advanced_data_loader.py
 - scripts/ de vérification
 - data/reports/ automatiques
-Benaissa Hadjer - Data Visualization 🚧
+Benaissa Hadjer - Data Visualization 
 python
 # Responsabilités  
-- Dashboard interactif Plotly (🚧)
-- Cartes géographiques Folium (🔜)
-- Design système visualisation (🔜)
-- Interface utilisateur (🔜)
+- Dashboard interactif Plotly 
+- Cartes géographiques Folium 
+- Design système visualisation 
+- Interface utilisateur 
 
 # Données d'entrée
-- dashboard_data.json (✅ prêt)
+- dashboard_data.json 
 - Structure API définie
-Léa Benameur - Quality Assurance 🔜
+Léa Benameur - Quality Assurance 
 python
 # Responsabilités
-- Tests validation données (🔜)
-- Métriques qualité (🔜)
-- Documentation utilisateur (🔜)
-- Cas de test (🔜)
+- Tests validation données 
+- Métriques qualité 
+- Documentation utilisateur 
+- Cas de test 
 
 # Outils disponibles
-- quality_report.json (✅ prêt)
-- Scripts vérification (✅ prêts)
+- quality_report.json 
+- Scripts vérification 
 📅 Planning Technique Détaillé
 Rétroplanning Réalisé (Phase 1)
 Planning Futur (Phases 2-3)
+```mermaid
+gantt
+    title Planning Immo_scope - Phases 2 & 3 (Novembre/Décembre 2025)
+    dateFormat  YYYY-MM-DD
+    section Data Visualization (Hadjer)
+    Prototype dashboard Plotly : 2025-11-20, 5d
+    Intégration cartes Folium : 2025-11-25, 5d
+    Filtres interactifs : 2025-11-30, 3d
+    Tests utilisateur : 2025-12-03, 2d
+    section Quality Assurance (Léa)
+    Tests unitaires DataLoader : 2025-11-25, 4d
+    Validation données : 2025-11-29, 3d
+    Documentation technique : 2025-12-02, 3d
+    section Intégration & Finalisation (Équipe)
+    Intégration composants : 2025-12-04, 2d
+    Déploiement dashboard : 2025-12-06, 2d
+    Répétition présentation : 2025-12-07, 1d
+    section Livrables
+    Soumission finale : 2025-12-10, 1d
 🔍 Analyse des Résultats Techniques
 Insights Données DVF 2023
 python

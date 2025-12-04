@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>readme</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="README_files/libs/clipboard/clipboard.min.js"></script>
+<script src="README_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="README_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="README_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="README_files/libs/quarto-html/popper.min.js"></script>
+<script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="README_files/libs/quarto-html/anchor.min.js"></script>
+<link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="README_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="immo_scope---rapport-technique-mi-parcours" class="level1">
+<h1>Immo_scope - Rapport Technique Mi-parcours</h1>
+<section id="informations-administratives" class="level2">
+<h2 class="anchored" data-anchor-id="informations-administratives">Informations Administratives</h2>
+<ul>
+<li><strong>Projet</strong> : Immo_scope - Analyse du marché immobilier français</li>
+<li><strong>Cours</strong> : HAX712X - Software development for data science</li>
+<li><strong>Période</strong> : 2024-2025</li>
+<li><strong>Équipe</strong> :
+<ul>
+<li>Rodrigue Mamy (22510795) - Data Engineering</li>
+<li>Benaissa Hadjer (22506347) - Data Visualization<br>
+</li>
+<li>Léa Benameur (22514472) - Quality Assurance</li>
+</ul></li>
+<li><strong>Date</strong> : 25 octobre 2024</li>
+</ul>
+</section>
+<section id="contexte-et-objectifs-pédagogiques" class="level2">
+<h2 class="anchored" data-anchor-id="contexte-et-objectifs-pédagogiques">Contexte et Objectifs Pédagogiques</h2>
+<section id="problématique-métier" class="level3">
+<h3 class="anchored" data-anchor-id="problématique-métier">Problématique Métier</h3>
+<p>Analyser les disparités géographiques du marché immobilier français à travers les données DVF (Demandes de Valeurs Foncières) pour fournir des insights accessibles au grand public.</p>
+</section>
+<section id="objectifs-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="objectifs-techniques">Objectifs Techniques</h3>
+<ul>
+<li><strong>Data Engineering</strong> : Pipeline ETL robuste pour données DVF</li>
+<li><strong>Software Architecture</strong> : Structure modulaire et maintenable</li>
+<li><strong>Data Visualization</strong> : Dashboard interactif et pédagogique</li>
+<li><strong>Quality Assurance</strong> : Validation et tests automatisés</li>
+<li><strong>Collaboration</strong> : Méthodologie Git et revue de code</li>
+</ul>
+</section>
+</section>
+<section id="architecture-technique-détaillée" class="level2">
+<h2 class="anchored" data-anchor-id="architecture-technique-détaillée">Architecture Technique Détaillée</h2>
+<section id="stack-technologique" class="level3">
+<h3 class="anchored" data-anchor-id="stack-technologique">Stack Technologique</h3>
+<p>```python # Core Data Processing Python 3.12 + pandas → Traitement données AdvancedDataLoader → Pipeline ETL personnalisé requests → Téléchargement API DVF</p>
+</section>
+</section>
+</section>
+<section id="data-validation-quality" class="level1">
+<h1>Data Validation &amp; Quality</h1>
+<p>pandas profiling → Analyse qualité custom validators → Règles métier JSON schemas → Contrats données</p>
+</section>
+<section id="visualization-en-cours" class="level1">
+<h1>Visualization (en cours)</h1>
+<p>Plotly → Graphiques interactifs Folium → Cartes géographiques Quarto → Rapports dynamiques</p>
+</section>
+<section id="devops-collaboration" class="level1">
+<h1>DevOps &amp; Collaboration</h1>
+<p>Git + GitHub → Versioning modular architecture → Maintenance automated reports → Documentation Workflow de Données text API DVF (data.gouv.fr) ↓ [Téléchargement automatique] ↓ [Nettoyage &amp; Validation] ↓ [Enrichissement métier] ↓ [Stockage format standard] ↓ [Génération rapports JSON] ↓ [Visualisation Dashboard] Résultats Phase 1 - Data Engineering (Rodrigue) Métriques de Qualité Données Métrique Valeur Seuil Statut Complétude 100% &gt;95%<br>
+Prix m² valides 100% 100%<br>
+Géolocalisation 100% 100%<br>
+Volume transactions 822 &gt;500<br>
+Couverture géographique 689 communes &gt;200<br>
+Performance DataLoader python # Métriques techniques Temps_processing: “~90 secondes” Mémoire_utilisée: “&lt; 500MB”<br>
+Robustesse: “Gestion erreurs HTTP + timeout” Reproductibilité: “Seed aléatoire + logs” Structure des Données Produites json { “datasets”: { “dvf_cleaned.csv”: { “description”: “Données principales nettoyées”, “size”: “822 transactions”, “columns”: [ “valeur_fonciere”, “surface_reelle_bati”, “type_local”, “nom_commune”, “code_departement”, “latitude”, “longitude”, “prix_m2”, “annee” ] } }, “reports”: { “dashboard_data.json”: “Données structurées visualisations”, “quality_report.json”: “Métriques qualité techniques”, “team_report.json”: “Suivi projet équipe” } } 🔧 Implémentation Technique - DataLoader Classe AdvancedDataLoader python class AdvancedDataLoader: “““Pipeline complet traitement données DVF”“”</p>
+<pre><code>def __init__(self):
+    self.base_url = "https://files.data.gouv.fr/geo-dvf/latest/csv"
+    self.validation_rules = {
+        'prix_m2': (500, 20000),
+        'surface': (9, 500),
+        'geography': {
+            'lat': (41.5, 51.5),
+            'lon': (-2.0, 8.0)
+        }
+    }
+
+def download_dvf_data(self, years, sample_size):
+    """Téléchargement avec gestion d'erreurs"""
+
+def _clean_and_validate(self, df):
+    """Nettoyage avec règles métier"""
+
+def _generate_quality_report(self, df):
+    """Rapport qualité automatique"""</code></pre>
+<p>Règles de Validation Implémentées Valeurs aberrantes : Filtrage prix m² hors [500€, 20000€]</p>
+<p>Géolocalisation : Coordonnées dans France métropolitaine</p>
+<p>Types de biens : Uniquement Maison/Appartement</p>
+<p>Surface réaliste : Entre 9m² et 500m²</p>
+<p>Consistance temporelle : Données 2023 uniquement</p>
+<p>Organisation et Méthodologie Workflow de Développement text Feature Branch → Development → Code Review → Merge → Integration ↓ ↓ ↓ ↓ ↓ [GitHub] [Tests locaux] [Validation] [QA] [Automation] Répartition des Rôles Techniques Rodrigue Mamy - Data Engineering python # Responsabilités - Conception architecture données - Implémentation DataLoader avancé - Pipeline ETL complet - Automatisation rapports - Optimisation performance</p>
+</section>
+<section id="livrables" class="level1">
+<h1>Livrables</h1>
+<ul>
+<li>advanced_data_loader.py</li>
+<li>scripts/ de vérification</li>
+<li>data/reports/ automatiques Benaissa Hadjer - Data Visualization python # Responsabilités<br>
+</li>
+<li>Dashboard interactif Plotly</li>
+<li>Cartes géographiques Folium</li>
+<li>Design système visualisation</li>
+<li>Interface utilisateur</li>
+</ul>
+</section>
+<section id="données-dentrée" class="level1">
+<h1>Données d’entrée</h1>
+<ul>
+<li>dashboard_data.json</li>
+<li>Structure API définie Léa Benameur - Quality Assurance python # Responsabilités</li>
+<li>Tests validation données</li>
+<li>Métriques qualité</li>
+<li>Documentation utilisateur</li>
+<li>Cas de test</li>
+</ul>
+</section>
+<section id="outils-disponibles" class="level1">
+<h1>Outils disponibles</h1>
+<ul>
+<li>quality_report.json</li>
+<li>Scripts vérification 📅 Planning Technique Détaillé Rétroplanning Réalisé (Phase 1) Planning Futur (Phases 2-3) ```mermaid gantt title Planning Immo_scope - Phases 2 &amp; 3 (Novembre/Décembre 2025) dateFormat YYYY-MM-DD section Data Visualization (Hadjer) Prototype dashboard Plotly : 2025-11-20, 5d Intégration cartes Folium : 2025-11-25, 5d Filtres interactifs : 2025-11-30, 3d Tests utilisateur : 2025-12-03, 2d section Quality Assurance (Léa) Tests unitaires DataLoader : 2025-11-25, 4d Validation données : 2025-11-29, 3d Documentation technique : 2025-12-02, 3d section Intégration &amp; Finalisation (Équipe) Intégration composants : 2025-12-04, 2d Déploiement dashboard : 2025-12-06, 2d Répétition présentation : 2025-12-07, 1d section Livrables Soumission finale : 2025-12-10, 1d 🔍 Analyse des Résultats Techniques Insights Données DVF 2023 python # Distribution géographique communes_couvertes = 689 departements = df[‘code_departement’].nunique() couverture_nationale = “France métropolitaine”</li>
+</ul>
+</section>
+<section id="analyse-typologique" class="level1">
+<h1>Analyse typologique</h1>
+<p>maisons = 467 (56.8%) appartements = 355 (43.2%) ratio_maison_appartement = 1.32</p>
+</section>
+<section id="métriques-prix" class="level1">
+<h1>Métriques prix</h1>
+<p>prix_moyen_m2 = 3,574 € surface_moyenne = 81 m² budget_moyen = 289,000 € Performance du Pipeline Temps d’exécution : Optimisé pour &lt; 2 minutes</p>
+<p>Usage mémoire : Contrôlé avec échantillonnage</p>
+<p>Robustesse : Gestion complète des erreurs réseau</p>
+<p>Reproductibilité : Seed aléatoire + logs détaillés</p>
+<p>🚀 Prochaines Étapes Techniques Phase 2 - Data Visualization (Hadjer) Dashboard Interactif</p>
+<p>Architecture composants Plotly</p>
+<p>Système de filtres dynamiques</p>
+<p>Responsive design mobile/desktop</p>
+<p>Visualisations Avancées</p>
+<p>Cartes de chaleur géographiques</p>
+<p>Analyses temporelles prix</p>
+<p>Comparaisons régionales</p>
+<p>Phase 3 - Quality Assurance (Léa) Tests Automatisés</p>
+<p>Unit tests DataLoader</p>
+<p>Integration tests pipeline</p>
+<p>Validation données</p>
+<p>Documentation</p>
+<p>Guide utilisateur final</p>
+<p>Documentation technique</p>
+<p>Procédures déploiement</p>
+<p>Livrables Finaux Attendus ✅ Application web interactive (Dashboard)</p>
+<p>✅ Rapport Quarto professionnel</p>
+<p>✅ Documentation technique complète</p>
+<p>✅ Code source maintenable</p>
+<p>✅ Présentation orale (15min + questions)</p>
+<p>📎 Annexes Techniques Structure du Projet text Immo_scope/ ├── immo_scope/ # Modules Python │ ├── advanced_data_loader.py # DataLoader principal │ └── visualizer.py # Visualisations (en dev) ├── scripts/ # Scripts utilitaires │ ├── check_results.py # Vérification données │ ├── generate_final_reports.py # Génération rapports │ └── verify_installation.py # Test installation ├── data/ # Gestion données │ ├── processed/ # Données nettoyées │ └── reports/ # Rapports automatiques ├── notebooks/ # Exploration données └── roadmap/ # Documentation └── README.qmd # Ce fichier Métriques de Suivi Qualité Couverture code : Objectif &gt; 80%</p>
+<p>Qualité données : Objectif &gt; 95%</p>
+<p>Performance : Temps traitement &lt; 3min</p>
+<p>Maintenabilité : Documentation complète</p>
+<p><em>Document technique maintenu par l’équipe Immo_scope</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
