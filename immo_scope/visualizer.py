@@ -95,7 +95,7 @@ class Visualizer:
             y=stats.index,
             orientation='h',
             labels={'x': 'Nombre de transactions', 'y': 'Commune'},
-            title=f"🏆 Top {top_n} communes par transactions",
+            title=f" Top {top_n} communes par transactions",
             color=stats.values,
             color_continuous_scale="Viridis",
             text=stats.values
@@ -178,21 +178,50 @@ class Visualizer:
 #   TEST DU MODULE
 # --------------------------------------------------------------------
 if __name__ == "__main__":
-
     
+    
+    # Initialiser le visualizer
     viz = Visualizer()
-
-    print("\n1. Types de biens")
-    viz.create_property_types_chart().show()
-
-    print("\n2. Distribution prix")
-    viz.create_price_distribution().show()
-
-    print("\n3. Top communes")
-    viz.create_top_cities_chart().show()
-
-    print("\n4. Surface vs prix")
-    viz.create_price_vs_surface().show()
-
-    print("\n5. Dashboard complet")
-    viz.create_dashboard_overview().show()
+    
+    # Menu de test interactif
+    print("\n QUE VEUX-TU TESTER ?")
+    print("1. Camembert types de biens")
+    print("2. Histogramme prix")
+    print("3. Top communes") 
+    print("4. Graphique surface vs prix")
+    print("5. Dashboard complet")
+    print("6. Tout tester")
+    
+    try:
+        choix = input("\n Ton choix (1-6): ").strip()
+        
+        if choix in ['1', '6']:
+            print("\n Test camembert...")
+            fig1 = viz.create_property_types_chart()
+            fig1.show()
+            
+        if choix in ['2', '6']:
+            print("\n Test histogramme...")
+            fig2 = viz.create_price_distribution()
+            fig2.show()
+            
+        if choix in ['3', '6']:
+            print("\n Test top communes...")
+            fig3 = viz.create_top_cities_chart()
+            fig3.show()
+            
+        if choix in ['4', '6']:
+            print("\n Test surface vs prix...")
+            fig4 = viz.create_price_vs_surface()
+            fig4.show()
+            
+        if choix in ['5', '6']:
+            print("\n Test dashboard complet...")
+            dashboard = viz.create_dashboard_overview()
+            dashboard.show()
+            
+        
+        
+    except Exception as e:
+        print(f" Erreur: {e}")
+        
