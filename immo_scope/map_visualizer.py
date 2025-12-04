@@ -67,4 +67,4 @@ if __name__ == "__main__":
 
     viz = MapVisualizer()
     fig = viz.create_price_map()
-    fig.show()
+    #fig.show()
