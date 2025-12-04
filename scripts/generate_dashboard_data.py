@@ -1,51 +1,49 @@
-# -*- coding: utf-8 -*-
 """
-Created on Wed Nov 26 14:48:45 2025
+SCRIPT DE PRÉPARATION DES DONNÉES POUR LE DASHBOARD IMMO_SCOPE
+Ce script lit le fichier DVF nettoyé, calcule des métriques utiles
+et génère un fichier JSON utilisé par le dashboard Streamlit
+"""
 
-@author: mamyr
-"""
-
-"""
-SCRIPT POUR HADJER - Préparation des données pour le dashboard
-"""
 import pandas as pd
 import json
 from pathlib import Path
 
-print(" PRÉPARATION DASHBOARD - Données par Rodrigue")
-print("=" * 50)
+def prepare_dashboard_data():
+    print("Préparation des données DVF pour le dashboard...")
 
-# Chemin correct
-current_dir = Path(__file__).parent
-data_file = current_dir.parent / "data" / "processed" / "dvf_cleaned.csv"
+    # Détection du chemin
+    project_root = Path(__file__).resolve().parents[1]
 
-if not data_file.exists():
-    print(" Données non trouvées. Génère les données d'abord.")
-    exit()
+    # Fichier DVF nettoyé
+    dvf_file = project_root / "data" / "processed" / "dvf_cleaned.csv"
 
-# Charger les données de Rodrigue
-df = pd.read_csv(data_file)
+    # Fichier de sortie JSON
+    output_file = project_root / "data" / "reports" / "dashboard_data.json"
 
-# Données agrégées pour le dashboard
-dashboard_data = {
-    "metrics": {
-        "total_transactions": len(df),
-        "avg_price_m2": int(df['prix_m2'].mean()),
-        "avg_surface": int(df['surface_reelle_bati'].mean()),
-        "total_cities": df['nom_commune'].nunique() if 'nom_commune' in df.columns else 0
-    },
-    "price_by_year": df.groupby('annee')['prix_m2'].mean().round().to_dict(),
-    "transactions_by_type": df['type_local'].value_counts().to_dict() if 'type_local' in df.columns else {},
-    "top_cities": df['nom_commune'].value_counts().head(10).to_dict() if 'nom_commune' in df.columns else {}
-}
+    # Charger le CSV
+    df = pd.read_csv(dvf_file)
 
-# Sauvegarder pour Hadjer
-dashboard_file = current_dir.parent / "data" / "reports" / "dashboard_data.json"
-with open(dashboard_file, 'w', encoding='utf-8') as f:
-    json.dump(dashboard_data, f, indent=2, ensure_ascii=False)
+    # ----------------------------
+    # CALCUL DES MÉTRIQUES
+    # ----------------------------
+    metrics = {
+        "total_transactions": int(len(df)),
+        "avg_price_m2": float(df["prix_m2"].mean()),
+        "max_price_m2": float(df["prix_m2"].max()),
+        "min_price_m2": float(df["prix_m2"].min()),
+        "unique_communes": int(df["nom_commune"].nunique())
+    }
 
-print(f" Données dashboard préparées: {dashboard_file}")
-print(f" Métriques pour Hadjer:")
-print(f"   • {dashboard_data['metrics']['total_transactions']} transactions")
-print(f"   • {dashboard_data['metrics']['avg_price_m2']} €/m² moyen")
-print(f"   • {dashboard_data['metrics']['total_cities']} communes")
+    # ----------------------------
+    # SAUVEGARDE DU JSON
+    # ----------------------------
+    output_data = {"metrics": metrics}
+
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(output_data, f, indent=4, ensure_ascii=False)
+
+    print(f" Données dashboard générées : {output_file}")
+
+
+if __name__ == "__main__":
+    prepare_dashboard_data()
