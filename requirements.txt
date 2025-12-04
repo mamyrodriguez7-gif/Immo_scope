@@ -1,0 +1,16 @@
+#Core data handling
+pandas
+requests
+
+#Core visualization
+plotly
+
+#Dashboard web (pour le livrable de Hadjer)
+streamlit
+
+#Tests unitaires (pour le livrable de Léa)
+pytest
+
+#Pour la carte interactive
+folium
+numpy
