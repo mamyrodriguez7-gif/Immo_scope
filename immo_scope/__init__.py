@@ -10,4 +10,3 @@ __author__ = "Rodrigue Mamy, Benaissa Hadjer, Léa Benameur"
 __description__ = "Package pour l'analyse des données DVF avec dashboard interactif"
 
 __all__ = ["Visualizer", "MapVisualizer"]
-
