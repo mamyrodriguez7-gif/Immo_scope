@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Graphes interactifs</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+/* Styles des onglets */
+.tab {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.tab button:hover { background-color: #ddd; }
+.tab button.active { background-color: #ccc; }
+.tabcontent {
+  display: none;
+  padding: 10px 0;
+}
+</style>
+</head>
+<body>
+
+<h1>Graphes interactifs</h1>
+
+<!-- Onglets -->
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Carte')" id="defaultOpen">Carte</button>
+  <button class="tablinks" onclick="openTab(event, 'Histogramme')">Histogramme</button>
+  <button class="tablinks" onclick="openTab(event, 'Nuage')">Nuage</button>
+</div>
+
+<!-- Onglet Carte -->
+<div id="Carte" class="tabcontent">
+  <!-- Colle ici le contenu de snippets/map.html -->
+</div>
+
+<!-- Onglet Histogramme -->
+<div id="Histogramme" class="tabcontent">
+  <!-- Colle ici le contenu de snippets/histogram.html -->
+</div>
+
+<!-- Onglet Nuage -->
+<div id="Nuage" class="tabcontent">
+  <!-- Colle ici le contenu de snippets/scatter.html -->
+</div>
+
+<script>
+// Fonction pour gérer les onglets
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i=0; i<tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i=0; i<tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+// Ouvrir l'onglet par défaut
+document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>

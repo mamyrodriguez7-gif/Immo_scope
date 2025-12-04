@@ -1,38 +1,169 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Carte des prix immobiliers</title>
+<meta charset="UTF-8">
+<title>Dashboard Immobilier</title>
+<script src="https://cdn.plot.ly/plotly-2.34.0.min.js"></script>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
 
-    <!-- Plotly.js version récente -->
-    <script src="https://cdn.plot.ly/plotly-2.34.0.min.js"></script>
+    /* Sidebar */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 220px;
+        height: 100%;
+        background-color: #111;
+        padding-top: 20px;
+    }
+    .sidebar a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+    }
+    .sidebar a:hover {
+        background-color: #575757;
+    }
+
+    /* Contenu */
+    .content {
+        margin-left: 230px;
+        padding: 20px;
+    }
+    h1, h2 {
+        margin-top: 0;
+    }
+
+    /* Onglets */
+    .tab {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+        background-color: #f1f1f1;
+        margin-bottom: 20px;
+    }
+    .tab button {
+        background-color: inherit;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        transition: 0.3s;
+        font-size: 16px;
+    }
+    .tab button:hover {
+        background-color: #ddd;
+    }
+    .tab button.active {
+        background-color: #ccc;
+    }
+    .tabcontent {
+        display: none;
+        width: 100%;
+        height: 500px;
+    }
+    .tabcontent.active {
+        display: block;
+    }
+</style>
 </head>
 <body>
 
-<h1>Carte interactive des prix immobiliers par département</h1>
+<!-- MENU -->
+<div class="sidebar">
+    <a href="#introduction">Introduction</a>
+    <a href="#graphes">Graphes</a>
+    <a href="#carte">Carte</a>
+    <a href="#contact">Contact</a>
+</div>
 
-<div id="map" style="width:100%; height:600px;"></div>
+<!-- CONTENU -->
+<div class="content">
+    <!-- INTRODUCTION -->
+    <section id="introduction">
+        <h1>Bienvenue sur le Dashboard Immobilier</h1>
+        <p>
+            Ce site présente des analyses interactives sur les transactions immobilières en France.
+            Vous pouvez explorer différents graphes et la carte des prix moyens par département.
+        </p>
+    </section>
 
-<!-- Stockage sécurisé du JSON dans un script type JSON -->
-<script id="fig-data" type="application/json">
-    {{ fig_json | safe }}
-</script>
+    <!-- GRAPHES avec onglets -->
+    <section id="graphes">
+        <h2>Graphes</h2>
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'property_types')">Types de biens</button>
+            <button class="tablinks" onclick="openTab(event, 'price_distribution')">Distribution prix</button>
+            <button class="tablinks" onclick="openTab(event, 'top_cities')">Top communes</button>
+            <button class="tablinks" onclick="openTab(event, 'surface_price')">Surface vs Prix</button>
+        </div>
 
+        <div id="property_types" class="tabcontent active"></div>
+        <div id="price_distribution" class="tabcontent"></div>
+        <div id="top_cities" class="tabcontent"></div>
+        <div id="surface_price" class="tabcontent"></div>
+    </section>
+
+    <!-- CARTE -->
+    <section id="carte">
+        <h2>Carte des prix immobiliers par département</h2>
+        <div class="plot-container" id="map" style="height:600px;"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>
+            Pour toute question ou suggestion, contactez-nous à :
+            <a href="mailto:contact@example.com">contact@example.com</a>
+        </p>
+    </section>
+</div>
+
+<!-- SCRIPT PLOTLY ET ONGLETS -->
 <script>
-    // Lecture du JSON stocké dans le script
-    const figText = document.getElementById('fig-data').textContent;
+const figures = {{ figures | tojson | safe }};
 
-    console.log("JSON reçu :", figText.substring(0, 80) + "...");
+// Fonction pour afficher un graphique Plotly
+function renderPlot(id, fig_json) {
+    const fig = JSON.parse(fig_json);
+    Plotly.newPlot(id, fig.data, fig.layout)
+        .then(() => console.log(`Graphique ${id} affiché !`))
+        .catch(err => console.error(`Erreur ${id}:`, err));
+}
 
-    // Conversion en objet JS
-    const fig = JSON.parse(figText);
+// Rendu initial : seulement l'onglet actif
+renderPlot("property_types", figures.property_types);
 
-    console.log("Objet JS :", fig);
+// Gestion des onglets
+function openTab(evt, tabName) {
+    // Masquer tous les contenus
+    const contents = document.getElementsByClassName("tabcontent");
+    for (let i = 0; i < contents.length; i++) {
+        contents[i].classList.remove("active");
+    }
+    // Retirer l'état actif de tous les boutons
+    const tabs = document.getElementsByClassName("tablinks");
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+    // Montrer le contenu sélectionné et activer le bouton
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
 
-    // Affichage de la carte
-    Plotly.newPlot("map", fig.data, fig.layout)
-        .then(() => console.log("Carte affichée !"))
-        .catch(err => console.error("Erreur Plotly :", err));
+    // Rendu du graphique si pas encore affiché
+    if (document.getElementById(tabName).innerHTML.trim() === "") {
+        renderPlot(tabName, figures[tabName]);
+    }
+}
+
+// Carte
+renderPlot("map", figures.map);
 </script>
 
 </body>
