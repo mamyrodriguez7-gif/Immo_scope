@@ -2,12 +2,38 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Test Jinja</title>
+    <title>Carte des prix immobiliers</title>
+
+    <!-- Plotly.js version récente -->
+    <script src="https://cdn.plot.ly/plotly-2.34.0.min.js"></script>
 </head>
 <body>
 
-<h1>TEST JINJA</h1>
-<p>Résultat : {{ 2 + 2 }}</p>
+<h1>Carte interactive des prix immobiliers par département</h1>
+
+<div id="map" style="width:100%; height:600px;"></div>
+
+<!-- Stockage sécurisé du JSON dans un script type JSON -->
+<script id="fig-data" type="application/json">
+    {{ fig_json | safe }}
+</script>
+
+<script>
+    // Lecture du JSON stocké dans le script
+    const figText = document.getElementById('fig-data').textContent;
+
+    console.log("JSON reçu :", figText.substring(0, 80) + "...");
+
+    // Conversion en objet JS
+    const fig = JSON.parse(figText);
+
+    console.log("Objet JS :", fig);
+
+    // Affichage de la carte
+    Plotly.newPlot("map", fig.data, fig.layout)
+        .then(() => console.log("Carte affichée !"))
+        .catch(err => console.error("Erreur Plotly :", err));
+</script>
 
 </body>
 </html>
