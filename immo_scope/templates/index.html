@@ -10,7 +10,7 @@
         font-family: Arial, sans-serif;
     }
 
-    /* Sidebar */
+    /* Sidebar / Menu à gauche */
     .sidebar {
         position: fixed;
         top: 0;
@@ -37,10 +37,10 @@
         padding: 20px;
     }
     h1, h2 {
-        margin-top: 0;
+        margin-top: 40px; /* plus d'espacement avant chaque section */
     }
 
-    /* Onglets */
+    /* Onglets Graphes */
     .tab {
         overflow: hidden;
         border-bottom: 1px solid #ccc;
@@ -65,10 +65,27 @@
     .tabcontent {
         display: none;
         width: 100%;
-        height: 500px;
+        margin-bottom: 40px; /* plus d'espacement entre onglets */
     }
     .tabcontent.active {
         display: block;
+    }
+    .tabcontent .description {
+        margin-top: 15px;
+        font-style: italic;
+        color: #333;
+    }
+    .plot-container {
+        width: 100%;
+        height: 500px;
+        margin-top: 15px; /* espacement entre titre et graphique */
+    }
+
+    /* Carte spécifique */
+    #carte .description {
+        margin-top: 15px;
+        font-style: italic;
+        color: #333;
     }
 </style>
 </head>
@@ -84,16 +101,19 @@
 
 <!-- CONTENU -->
 <div class="content">
+
     <!-- INTRODUCTION -->
     <section id="introduction">
         <h1>Bienvenue sur le Dashboard Immobilier</h1>
         <p>
-            Ce site présente des analyses interactives sur les transactions immobilières en France.
-            Vous pouvez explorer différents graphes et la carte des prix moyens par département.
+            Ce site  présente une série de visualisations créées à partir de la base DVF (Demandes de Valeurs Foncières), 
+qui recense l’ensemble des transactions immobilières réalisées en France. 
+L’objectif de ces graphiques est de fournir une analyse exploratoire du marché immobilier afin de mettre en évidence 
+les principales tendances structurelles : répartition des biens, niveau des prix, dynamiques territoriales et relations entre variables.
         </p>
     </section>
 
-    <!-- GRAPHES avec onglets -->
+    <!-- GRAPHES avec onglets et descriptions -->
     <section id="graphes">
         <h2>Graphes</h2>
         <div class="tab">
@@ -103,16 +123,50 @@
             <button class="tablinks" onclick="openTab(event, 'surface_price')">Surface vs Prix</button>
         </div>
 
-        <div id="property_types" class="tabcontent active"></div>
-        <div id="price_distribution" class="tabcontent"></div>
-        <div id="top_cities" class="tabcontent"></div>
-        <div id="surface_price" class="tabcontent"></div>
+        <div id="property_types" class="tabcontent active">
+            <div id="property_types_plot" class="plot-container"></div>
+            <div class="description">
+                Ce graphique en camembert montre la proportion des différents types de biens (maisons, appartements).
+Il permet de comprendre la structure du marché en identifiant les catégories les plus présentes dans les transactions.
+</div>
+        </div>
+
+        <div id="price_distribution" class="tabcontent">
+            <div id="price_distribution_plot" class="plot-container"></div>
+            <div class="description">
+                L’histogramme représente la distribution des prix au m² sur l’ensemble des transactions. 
+La ligne en pointillés correspond au prix moyen national. 
+Ce graphique permet d’observer la dispersion des prix et de repérer la présence de biens très chers ou très abordables.
+</div>
+        </div>
+
+        <div id="top_cities" class="tabcontent">
+            <div id="top_cities_plot" class="plot-container"></div>
+            <div class="description">
+                Ce graphique classe les communes selon leur nombre de transactions. 
+Il met en avant les zones les plus dynamiques où l’activité immobilière est particulièrement élevée.</div>
+        </div>
+
+        <div id="surface_price" class="tabcontent">
+            <div id="surface_price_plot" class="plot-container"></div>
+            <div class="description">
+                Ce nuage de points étudie le lien entre la superficie d’un bien et son prix au m². 
+Il montre notamment que les petites surfaces tendent à avoir un prix au m² plus élevé, 
+tandis que les grandes surfaces affichent souvent un prix plus faible. 
+Cette visualisation permet de mieux comprendre la structure des prix selon les caractéristiques du bien.
+
+            </div>
+        </div>
     </section>
 
     <!-- CARTE -->
     <section id="carte">
         <h2>Carte des prix immobiliers par département</h2>
-        <div class="plot-container" id="map" style="height:600px;"></div>
+        <div id="map" class="plot-container" style="height:600px;"></div>
+        <div class="description">
+            Cette carte interactive montre le prix moyen au m² par département en France. Les couleurs plus foncées indiquent des prix plus élevés.
+            Vous pouvez zoomer et naviguer sur la carte pour explorer chaque département.
+        </div>
     </section>
 
     <!-- CONTACT -->
@@ -129,41 +183,40 @@
 <script>
 const figures = {{ figures | tojson | safe }};
 
-// Fonction pour afficher un graphique Plotly
-function renderPlot(id, fig_json) {
+// Fonction pour afficher un graphique Plotly dans son div spécifique
+function renderPlot(id, fig_json, divId=null) {
     const fig = JSON.parse(fig_json);
-    Plotly.newPlot(id, fig.data, fig.layout)
+    const targetDiv = divId || (id + "_plot");
+    Plotly.newPlot(targetDiv, fig.data, fig.layout)
         .then(() => console.log(`Graphique ${id} affiché !`))
         .catch(err => console.error(`Erreur ${id}:`, err));
 }
 
-// Rendu initial : seulement l'onglet actif
+// Rendu initial : onglet actif seulement
 renderPlot("property_types", figures.property_types);
 
 // Gestion des onglets
 function openTab(evt, tabName) {
-    // Masquer tous les contenus
     const contents = document.getElementsByClassName("tabcontent");
     for (let i = 0; i < contents.length; i++) {
         contents[i].classList.remove("active");
     }
-    // Retirer l'état actif de tous les boutons
     const tabs = document.getElementsByClassName("tablinks");
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].classList.remove("active");
     }
-    // Montrer le contenu sélectionné et activer le bouton
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
 
     // Rendu du graphique si pas encore affiché
-    if (document.getElementById(tabName).innerHTML.trim() === "") {
+    const divId = tabName + "_plot";
+    if (document.getElementById(divId).innerHTML.trim() === "") {
         renderPlot(tabName, figures[tabName]);
     }
 }
 
-// Carte
-renderPlot("map", figures.map);
+// Carte (rendu séparé)
+renderPlot("map", figures.map, "map");
 </script>
 
 </body>
