@@ -110,4 +110,8 @@ class MapVisualizer:
 # -------------------------------------------------------------
 # Test direct du module
 # -------------------------------------------------------------
+<<<<<<< HEAD
 # ... (bloc if __name__ == "__main__": inchangé)
+=======
+# ... (bloc if __name__ == "__main__": inchangé)
+>>>>>>> f6868508e2fd2b1feba7fed56ee8eda00922db62

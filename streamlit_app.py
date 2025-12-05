@@ -227,4 +227,9 @@ elif menu == "Dashboard complet":
     st.caption("Vue compilée des principales tendances de prix et de répartition.")
     
 st.sidebar.markdown("---")
+<<<<<<< HEAD
 st.sidebar.caption(f"Dernière mise à jour : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+=======
+st.sidebar.caption(f"Dernière mise à jour : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+>>>>>>> f6868508e2fd2b1feba7fed56ee8eda00922db62
