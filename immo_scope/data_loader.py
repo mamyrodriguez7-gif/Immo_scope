@@ -15,7 +15,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 ssl._create_default_https_context = ssl._create_unverified_context
 
 class BaseDataLoader(ABC):
-    """Classe de base abstraite pour le chargement de données (Bonus POO/Héritage)."""
+    """Classe de base abstraite pour le chargement de données."""
     
     @abstractmethod
     def download_data(self, *args, **kwargs):
@@ -30,7 +30,7 @@ class BaseDataLoader(ABC):
 class DataLoader(BaseDataLoader):
     """
     Gère le pipeline de données DVF : téléchargement, nettoyage, calculs et sauvegarde.
-    Hérite de BaseDataLoader pour satisfaire au bonus POO/Héritage.
+    Hérite de BaseDataLoader pour satisfaire à POO/Héritage.
     """
     def __init__(self):
         """Initialise le DataLoader, configure les chemins et crée les répertoires."""
@@ -53,7 +53,7 @@ class DataLoader(BaseDataLoader):
         Parameters
         ----------
         year : int
-            Année des données à télécharger (par défaut: 2023, cohérent avec le README).
+            Année des données à télécharger (par défaut: 2023).
 
         Returns
         -------
