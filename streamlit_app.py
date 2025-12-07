@@ -1,12 +1,11 @@
 import streamlit as st
 from immo_scope.visualizer import Visualizer
 from immo_scope.map_visualizer import MapVisualizer
-# --- CORRECTION DE L'ERREUR : Importation de datetime ---
 from datetime import datetime
 import pandas as pd
 import plotly.express as px
 
-# --- OPTIMISATION CRITIQUE : Utilisation du cache Streamlit ---
+
 @st.cache_resource
 def load_visualizers():
     """Instancie et met en cache les classes de visualisation."""
@@ -14,7 +13,7 @@ def load_visualizers():
         # Les classes Visualizer et MapVisualizer contiennent la logique de chargement de dvf_cleaned.csv
         return Visualizer(), MapVisualizer()
     except Exception as e:
-        # Pour la démo, on affiche juste l'erreur sans bloquer le lancement si le df est vide.
+       
         return None, None
 
 viz, map_viz = load_visualizers()
@@ -25,17 +24,17 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- STYLE PROFESSIONNEL : Utiliser des colonnes pour le titre et le statut ---
+
 col_logo, col_title = st.columns([1, 6])
 with col_logo:
-    # Icône ou logo de projet (peut être remplacé par votre propre image)
+    
     st.image("https://placehold.co/100x100/4ECDC4/white?text=IMMO", width=80) 
 
 with col_title:
     st.title("🏡 Immo_Scope – Analyse du marché immobilier français")
     st.markdown("Plateforme interactive : **Visualisations** | **Qualité** | **Ingénierie de Données**")
 
-st.divider() # Séparateur visuel
+st.divider() # 
 
 # ----------------------------------------------------------------------
 # VÉRIFICATION D'ERREUR AU CHARGEMENT
@@ -46,7 +45,7 @@ if viz is None or map_viz is None:
     st.info("Vérifiez l'exécution du DataLoader (rapport_rodrigue.py) pour générer les données.")
     st.stop() 
 
-# Navigation (Widget principal)
+# Navigation 
 menu = st.sidebar.selectbox(
     "📌 Navigation",
     ["Accueil", "Visualisations", "Carte interactive", "Dashboard complet"]
@@ -65,7 +64,7 @@ if menu == "Accueil":
 
     st.subheader("Objectifs et Répartition des Rôles")
     
-    # --- BILAN D'ÉQUIPE (Stylisé) ---
+    # --- BILAN D'ÉQUIPE 
     with st.container(border=True):
         st.markdown("**Statut : Phase de Données Terminée & Dashboard Opérationnel**")
         st.markdown("""
@@ -84,8 +83,7 @@ if menu == "Accueil":
         st.metric("Prix Moyen / m²", f"{viz.data['metrics']['avg_price_m2']:.0f} €", 
                   delta=f"Surface Moyenne: {viz.df['surface_reelle_bati'].mean():.0f} m²")
     except Exception:
-        pass # Affichage de base en cas d'échec des métriques
-
+        pass  
 elif menu == "Visualisations":
     st.header("2. Analyse Détaillée des Tendances")
 
@@ -147,7 +145,7 @@ elif menu == "Carte interactive":
         if selected_dept != "Tous les départements":
             df_filtered = df_map_source[df_map_source['code_departement'] == selected_dept].copy()
             
-            # Affichage des villes filtrées (Confirmation pour l'utilisateur)
+            # Affichage des villes filtrées
             top_cities_dept = df_filtered['nom_commune'].value_counts().head(5).index.tolist()
             st.info(f"Les 5 villes les plus actives dans le **{selected_dept}** sont : **{', '.join(top_cities_dept)}**.")
         else:
@@ -155,7 +153,7 @@ elif menu == "Carte interactive":
         
         st.markdown("---")
         
-        # 3. Affichage de la carte (utilise le Scatter Mapbox pour les noms de ville)
+        # 3. Affichage de la carte 
         
         if len(df_filtered) > 0:
             st.subheader("Transactions individuelles")
@@ -187,7 +185,7 @@ elif menu == "Dashboard complet":
         selected_dept = st.selectbox(
             "Filtrer les transactions par Département :",
             options=["Tous les départements"] + departments,
-            key="dashboard_dept_select" # Nouvelle clé pour éviter les conflits
+            key="dashboard_dept_select" 
         )
         
         # 2. Application du filtre
@@ -221,8 +219,7 @@ elif menu == "Dashboard complet":
 
     # --- VUE DÉTAILLÉE DU MARCHÉ ---
     st.subheader("Rapport Multi-Dimensionnel Global")
-    # Pour l'aperçu général, on garde l'appel à la fonction d'origine pour ne pas impacter le travail de Rodrigue, 
-    # mais vous pouvez choisir d'utiliser df_filtered ici si la méthode supporte le filtrage.
+
     st.plotly_chart(viz.create_dashboard_overview(), use_container_width=True)
     st.caption("Vue compilée des principales tendances de prix et de répartition.")
     
