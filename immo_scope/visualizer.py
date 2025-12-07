@@ -1,4 +1,3 @@
-
 """
 MODULE DE VISUALISATION
 Développement du dashboard interactif
@@ -224,3 +223,4 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f" Erreur: {e}")
+        

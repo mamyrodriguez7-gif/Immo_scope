@@ -108,6 +108,9 @@ class MapVisualizer:
 
 
 # -------------------------------------------------------------
-# Test direct du module
+# LANCE LA CARTE SI ON EXÉCUTE CE FICHIER DIRECTEMENT
 # -------------------------------------------------------------
-# ... (bloc if __name__ == "__main__": inchangé)
+if __name__ == "__main__":
+    viz = MapVisualizer()
+    fig = viz.create_price_map()
+    fig.show()
