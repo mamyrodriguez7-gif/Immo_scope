@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>immo_scope.visualizer &#8212; Documentation Immo Scope 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=7a28dfa3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Code source de immo_scope.visualizer</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">MODULE DE VISUALISATION</span>
+<span class="sd">Développement du dashboard interactif</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<div class="viewcode-block" id="Visualizer">
+<a class="viewcode-back" href="../../immo_scope.html#immo_scope.visualizer.Visualizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Visualizer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise le visualizer avec les données&quot;&quot;&quot;</span>
+        <span class="n">current_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+        <span class="n">project_root</span> <span class="o">=</span> <span class="n">current_dir</span><span class="o">.</span><span class="n">parent</span>
+        
+        <span class="n">dashboard_file</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span> <span class="o">/</span> <span class="s2">&quot;reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;dashboard_data.json&quot;</span>
+        <span class="n">data_file</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span> <span class="o">/</span> <span class="s2">&quot;processed&quot;</span> <span class="o">/</span> <span class="s2">&quot;dvf_cleaned.csv&quot;</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visualizer initialisé avec succès!&quot;</span><span class="p">)</span>
+        
+        <span class="c1">#Les données agrégées</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dashboard_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Données dashboard chargées&quot;</span><span class="p">)</span>
+        
+        <span class="c1">#Les données complètes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> transactions chargées&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Afficher un résumé</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Résumé: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">][</span><span class="s1">&#39;total_transactions&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> transactions&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prix moyen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">][</span><span class="s1">&#39;avg_price_m2&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> €/m²&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># --------------------------------------------------------------------</span>
+    <span class="c1">#  Graphique  : Répartition des types de biens</span>
+    <span class="c1"># --------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Visualizer.create_property_types_chart">
+<a class="viewcode-back" href="../../immo_scope.html#immo_scope.visualizer.Visualizer.create_property_types_chart">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_property_types_chart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="s2">&quot;type_local&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Colonne &#39;type_local&#39; manquante&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;type_local&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
+            <span class="n">values</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">names</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot; Répartition des types de biens immobiliers&quot;</span><span class="p">,</span>
+            <span class="n">color_discrete_sequence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#FF6B6B&#39;</span><span class="p">,</span> <span class="s1">&#39;#4ECDC4&#39;</span><span class="p">,</span> <span class="s1">&#39;#FFD166&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">textinfo</span><span class="o">=</span><span class="s1">&#39;percent+label&#39;</span><span class="p">,</span> <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;inside&#39;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+    <span class="c1"># --------------------------------------------------------------------</span>
+    <span class="c1">#  Graphique : Distribution des prix</span>
+    <span class="c1"># --------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Visualizer.create_price_distribution">
+<a class="viewcode-back" href="../../immo_scope.html#immo_scope.visualizer.Visualizer.create_price_distribution">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_price_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="s1">&#39;prix_m2&#39;</span><span class="p">,</span>
+            <span class="n">nbins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot; Distribution des prix au m² en France&quot;</span><span class="p">,</span>
+            <span class="n">color_discrete_sequence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#45B7D1&#39;</span><span class="p">],</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.7</span>
+        <span class="p">)</span>
+
+        <span class="n">avg_price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;prix_m2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">avg_price</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+            <span class="n">annotation_text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Moyenne : </span><span class="si">{</span><span class="n">avg_price</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">€&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+    <span class="c1"># --------------------------------------------------------------------</span>
+    <span class="c1">#  Graphique : Top communes</span>
+    <span class="c1"># --------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Visualizer.create_top_cities_chart">
+<a class="viewcode-back" href="../../immo_scope.html#immo_scope.visualizer.Visualizer.create_top_cities_chart">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_top_cities_chart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+
+        <span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;nom_commune&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">top_n</span><span class="p">)</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+            <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;Nombre de transactions&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;Commune&#39;</span><span class="p">},</span>
+            <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot; Top </span><span class="si">{</span><span class="n">top_n</span><span class="si">}</span><span class="s2"> communes par transactions&quot;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">color_continuous_scale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">values</span>
+        <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+    <span class="c1"># --------------------------------------------------------------------</span>
+    <span class="c1">#  Graphique : Surface vs Prix</span>
+    <span class="c1"># --------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Visualizer.create_price_vs_surface">
+<a class="viewcode-back" href="../../immo_scope.html#immo_scope.visualizer.Visualizer.create_price_vs_surface">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_price_vs_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">sample_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)))</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="n">sample_df</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="s1">&#39;surface_reelle_bati&#39;</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="s1">&#39;prix_m2&#39;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;type_local&#39;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s1">&#39; Relation entre surface et prix au m²&#39;</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;surface_reelle_bati&#39;</span><span class="p">:</span> <span class="s1">&#39;Surface (m²)&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;prix_m2&#39;</span><span class="p">:</span> <span class="s1">&#39;Prix au m² (€)&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;type_local&#39;</span><span class="p">:</span> <span class="s1">&#39;Type de bien&#39;</span>
+            <span class="p">},</span>
+            <span class="n">hover_data</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nom_commune&#39;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+    <span class="c1"># --------------------------------------------------------------------</span>
+    <span class="c1">#  Dashboard complet</span>
+    <span class="c1"># --------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Visualizer.create_dashboard_overview">
+<a class="viewcode-back" href="../../immo_scope.html#immo_scope.visualizer.Visualizer.create_dashboard_overview">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_dashboard_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
+            <span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">subplot_titles</span><span class="o">=</span><span class="p">[</span>
+                <span class="s1">&#39; Types de biens&#39;</span><span class="p">,</span>
+                <span class="s1">&#39; Distribution prix&#39;</span><span class="p">,</span>
+                <span class="s1">&#39; Top communes&#39;</span><span class="p">,</span>
+                <span class="s1">&#39; Surface vs Prix&#39;</span>
+            <span class="p">],</span>
+            <span class="n">specs</span><span class="o">=</span><span class="p">[[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;domain&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;xy&quot;</span><span class="p">}],</span>
+                   <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;xy&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;xy&quot;</span><span class="p">}]]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Ajouter chaque graphique dans le dashboard</span>
+        <span class="n">charts</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_property_types_chart</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_price_distribution</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_top_cities_chart</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_price_vs_surface</span><span class="p">()</span>
+        <span class="p">]</span>
+
+        <span class="n">positions</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">chart</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">charts</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">chart</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">chart</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+                    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">height</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot; Dashboard Immobilier France - Vue d&#39;ensemble&quot;</span><span class="p">,</span>
+            <span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+</div>
+
+
+
+
+<span class="c1"># --------------------------------------------------------------------</span>
+<span class="c1">#   TEST DU MODULE</span>
+<span class="c1"># --------------------------------------------------------------------</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    
+    
+    <span class="c1"># Initialiser le visualizer</span>
+    <span class="n">viz</span> <span class="o">=</span> <span class="n">Visualizer</span><span class="p">()</span>
+    
+    <span class="c1"># Menu de test interactif</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> QUE VEUX-TU TESTER ?&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Camembert types de biens&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Histogramme prix&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Top communes&quot;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Graphique surface vs prix&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5. Dashboard complet&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;6. Tout tester&quot;</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">choix</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Ton choix (1-6): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">choix</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test camembert...&quot;</span><span class="p">)</span>
+            <span class="n">fig1</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">create_property_types_chart</span><span class="p">()</span>
+            <span class="n">fig1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+        <span class="k">if</span> <span class="n">choix</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test histogramme...&quot;</span><span class="p">)</span>
+            <span class="n">fig2</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">create_price_distribution</span><span class="p">()</span>
+            <span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+        <span class="k">if</span> <span class="n">choix</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test top communes...&quot;</span><span class="p">)</span>
+            <span class="n">fig3</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">create_top_cities_chart</span><span class="p">()</span>
+            <span class="n">fig3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+        <span class="k">if</span> <span class="n">choix</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test surface vs prix...&quot;</span><span class="p">)</span>
+            <span class="n">fig4</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">create_price_vs_surface</span><span class="p">()</span>
+            <span class="n">fig4</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+        <span class="k">if</span> <span class="n">choix</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Test dashboard complet...&quot;</span><span class="p">)</span>
+            <span class="n">dashboard</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">create_dashboard_overview</span><span class="p">()</span>
+            <span class="n">dashboard</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+        
+        
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Erreur: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Immo Scope</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">immo_scope</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

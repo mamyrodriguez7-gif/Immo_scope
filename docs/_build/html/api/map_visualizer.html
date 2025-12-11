@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MapVisualizer Module &#8212; Documentation Immo Scope 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=7a28dfa3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=e6b791cb"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="prev" title="Visualizer Module" href="visualizer.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-immo_scope.map_visualizer">
+<span id="mapvisualizer-module"></span><h1>MapVisualizer Module<a class="headerlink" href="#module-immo_scope.map_visualizer" title="Lien vers cette rubrique">¶</a></h1>
+<p>MAP VISUALIZER
+Carte interactive des prix immobiliers par département (France)</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="immo_scope.map_visualizer.MapVisualizer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">immo_scope.map_visualizer.</span></span><span class="sig-name descname"><span class="pre">MapVisualizer</span></span><a class="reference internal" href="../_modules/immo_scope/map_visualizer.html#MapVisualizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#immo_scope.map_visualizer.MapVisualizer" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="immo_scope.map_visualizer.MapVisualizer.create_price_map">
+<span class="sig-name descname"><span class="pre">create_price_map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/immo_scope/map_visualizer.html#MapVisualizer.create_price_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#immo_scope.map_visualizer.MapVisualizer.create_price_map" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Crée une carte choroplèthe du prix moyen au m² par département
+(pour la vue agrégée du Dashboard).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="immo_scope.map_visualizer.MapVisualizer.create_scatter_map">
+<span class="sig-name descname"><span class="pre">create_scatter_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_filtered</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/immo_scope/map_visualizer.html#MapVisualizer.create_scatter_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#immo_scope.map_visualizer.MapVisualizer.create_scatter_map" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Crée une carte affichant les transactions individuelles
+avec le nom de la commune au survol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df_filtered</strong> (<em>pd.DataFrame</em>) – DataFrame déjà filtré par le widget Streamlit (département, etc.).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Immo Scope</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API du Projet Immo Scope</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="visualizer.html">Visualizer Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MapVisualizer Module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">API du Projet Immo Scope</a><ul>
+      <li>Previous: <a href="visualizer.html" title="Chapitre précédent">Visualizer Module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/api/map_visualizer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
