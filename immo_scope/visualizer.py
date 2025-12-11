@@ -1,6 +1,8 @@
 """
-MODULE DE VISUALISATION
-Développement du dashboard interactif
+Module de visualisation du projet IMMO_SCOPE.
+
+Ce module contient la classe `Visualizer`, responsable de générer
+les différents graphiques utilisés dans le tableau de bord interactif.
 """
 import json
 import pandas as pd

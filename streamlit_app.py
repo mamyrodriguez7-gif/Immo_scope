@@ -1,3 +1,14 @@
+"""
+Application Streamlit principale du projet IMMO_SCOPE.
+
+Cette interface permet de visualiser :
+- les graphiques générés à partir des données DVF nettoyées ;
+- une carte interactive des transactions immobilières ;
+- un dashboard complet combinant plusieurs visualisations.
+
+"""
+
+
 import streamlit as st
 from immo_scope.visualizer import Visualizer
 from immo_scope.map_visualizer import MapVisualizer
