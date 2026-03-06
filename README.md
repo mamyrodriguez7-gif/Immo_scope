@@ -140,4 +140,4 @@ Ce projet est sous licence **MIT**. Voir le fichier `LICENSE` pour plus de déta
 
 ---
 
-*Dernière mise à jour : Novembre 2024 - Phase données terminée ✅*
+*Dernière mise à jour : Decembre 2025 - Phase données terminée ✅*
